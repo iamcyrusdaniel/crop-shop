@@ -2,8 +2,8 @@ const test_crop = document.getElementById("crop");
 
 var dragging = false
 
-let offsetX = 0
-let offsetY = 0
+var offsetX = 0
+var offsetY = 0
 
 var selected_crop_node = null
 
@@ -29,8 +29,8 @@ test_crop.addEventListener("mousedown", (event) => {
   let left_pos = computedStyles.left
   let top_pos = computedStyles.top
 
-  starting_mouse_posX = event.mouseX - left_pos
-  starting_mouse_posY = event.mouseY - top_pos
+  offsetX = event.clientX - parseInt(left_pos)
+  offsetY = event.clientY - parseInt(top_pos)
 
   selected_crop_node = test_crop
 });
