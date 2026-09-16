@@ -1,42 +1,50 @@
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
+const test_crop = document.getElementById("crop");
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
+var dragging = false
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
+let offsetX = 0
+let offsetY = 0
 
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
+var selected_crop_node = null
 
-dragElement(document.querySelector(".crop"))
+// test_crop.addEventListener("mousemove", (event) => {
+//   if (!dragging) {return}
+//   event.preventDefault();
+
+//   let computedStyles = window.getComputedStyle(test_crop);
+//   let left_pos = computedStyles.left
+//   let top_pos = computedStyles.top
+  
+//   test_crop.style.left = `${parseInt(left_pos)+(event.clientX-starting_mouse_posX)}px`;
+//   test_crop.style.top = `${parseInt(top_pos)+(event.clientY-starting_mouse_posY)}px`;
+//   // console.log(`${parseInt(left_pos)+(event.clientX-starting_mouse_posX)}px`);
+//   // console.log(`Coordinates: X=${`${parseInt(left_pos)+(event.clientX-starting_mouse_posX)}px;`}, Y=${parseInt(left_pos)}`);
+// })
+
+test_crop.addEventListener("mousedown", (event) => {
+  dragging = !dragging
+  if (!dragging) {return;};
+
+  let computedStyles = window.getComputedStyle(test_crop);
+  let left_pos = computedStyles.left
+  let top_pos = computedStyles.top
+
+  starting_mouse_posX = event.mouseX - left_pos
+  starting_mouse_posY = event.mouseY - top_pos
+
+  selected_crop_node = test_crop
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!dragging || selected_crop_node == null) {return};
+
+  selected_crop_node.style.left = `${e.clientX-offsetX}px`;
+  selected_crop_node.style.top = `${e.clientY-offsetY}px`;
+});
+
+// document.addEventListener("mouseup", () => {
+//     dragging = false;
+//     selected_crop_node = null;
+// });
+
+
