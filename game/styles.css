@@ -1,6 +1,8 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: fantasy;
+    font-weight: 1;
 }
 
 :root {
@@ -10,31 +12,32 @@
 body {
     width: 100vw;
     height: 100vh;
+    color: #67D74B;
+    background-color: #432222;
 } 
 
 .placement-grid {
-    background-color: gainsboro;
+    background-color: #824b30;
     width: 60%;
     max-width: 600px;
 
     translate: -50% -50%;
-    position: absolute;
+    position: relative;
     left: 50%;
     top: 45%;
     
     padding: 10px;
 
     display: grid;
-    gap: 10px;
+    gap: 7.5px;
     grid-template-columns: repeat(calc(sqrt(var(--child-count))), 1fr);
 }
 .placement-grid .slot {
+    box-sizing: border-box;
     width: 100%;
     aspect-ratio: 1/1;
-
-    background-color: white;
-    border-color: white;
-    border-width: 2px;
+    background-color: #996237;
+    border: solid #5c3b19 7.5px;
 }
 
 #crop {
