@@ -43,7 +43,7 @@ body {
     background-color: gray;
 
     position: absolute;
-    translate: -50% -50%;
+    /* translate: -50% -50%; */
     left: 50%;
 
     cursor: grab;
