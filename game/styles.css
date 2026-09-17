@@ -16,13 +16,36 @@ body {
     background-color: #432222;
 } 
 
+.level-selection-holder {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    height: fit-content;
+    width: fit-content;
+    background: #996237;
+    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+    padding: 1vw;
+}
+
+.level-selection {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto 1fr;
+}
+
 .level-option {
     box-sizing: border-box;
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
+    width: 8vw;
+    height: 8vw;
+    margin: 1vw;
+    font-size: 4vw;
     color: #67D74B;
-    border: 5px solid #1D5122;
+    border: 1vw solid #1D5122;
     background-color: #266F30;
 }
 
