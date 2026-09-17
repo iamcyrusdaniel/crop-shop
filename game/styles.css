@@ -16,6 +16,26 @@ body {
     background-color: #432222;
 } 
 
+.level-option {
+    box-sizing: border-box;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    color: #67D74B;
+    border: 5px solid #1D5122;
+    background-color: #266F30;
+}
+
+.level-option:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
+}
+
+.level-option:active {
+    filter: brightness(0.7);
+    transform: translate(1px, 1px);
+}
+
 .placement-grid {
     background-color: #824b30;
     width: 60%;
