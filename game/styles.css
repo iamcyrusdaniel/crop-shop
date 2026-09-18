@@ -103,7 +103,7 @@ body {
     border: solid #5c3b19 7.5px;
 }
 
-#crop {
+.crop {
     width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
     max-width: 144px;
     aspect-ratio: 1/2;

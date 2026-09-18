@@ -1,4 +1,4 @@
-const test_crop = document.getElementById("crop");
+const crops = document.querySelectorAll(".crop")
 
 var dragging = false
 
@@ -9,17 +9,19 @@ var selected_crop_node = null
 var overlapped_slots = []
 var chosen_slot = null
 
-test_crop.addEventListener("mousedown", (event) => {
-  dragging = true
+crops.forEach(element => {
+  element.addEventListener("mousedown", (event) => {
+    dragging = true
 
-  let computedStyles = window.getComputedStyle(test_crop);
-  let left_pos = computedStyles.left
-  let top_pos = computedStyles.top
+    let computedStyles = window.getComputedStyle(element);
+    let left_pos = computedStyles.left
+    let top_pos = computedStyles.top
 
-  offsetX = event.clientX - parseInt(left_pos)
-  offsetY = event.clientY - parseInt(top_pos)
+    offsetX = event.clientX - parseInt(left_pos)
+    offsetY = event.clientY - parseInt(top_pos)
 
-  selected_crop_node = test_crop
+    selected_crop_node = element
+  });
 });
 
 document.addEventListener("mousemove", (e) => {
@@ -66,7 +68,7 @@ document.addEventListener("mouseup", () => {
 
 function getOverlappingElements(targetElement) {
   const allElements = document.querySelectorAll('.slot');
-  const overlaps = []
+  const overlaps = [];
 
   allElements.forEach((element) => {
     const target_rect = targetElement.getBoundingClientRect();
