@@ -24,20 +24,7 @@ var chosen_slot = null
 // })
 
 test_crop.addEventListener("mousedown", (event) => {
-  dragging = !dragging
-  if (!dragging) {
-    if (chosen_slot != null) {
-      const overlapped_rect = chosen_slot.getBoundingClientRect()
-      const crop_rect = test_crop.getBoundingClientRect()
-
-      test_crop.style.left = overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
-      test_crop.style.top = overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
-
-      chosen_slot.style.backgroundColor = "rgb(255, 255, 255)";
-      overlapped_slots = []
-    }
-    return
-  }
+  dragging = true
 
   let computedStyles = window.getComputedStyle(test_crop);
   let left_pos = computedStyles.left
@@ -73,10 +60,10 @@ document.addEventListener("mousemove", (e) => {
 
       if (is_overlaping) {
         if (chosen_slot) {
-          chosen_slot.style.backgroundColor = "rgb(255, 255, 255)";
+          chosen_slot.style.backgroundColor = "#996237";
         }
        chosen_slot = slot
-       chosen_slot.style.backgroundColor = "rgb(199, 199, 199)";
+       chosen_slot.style.backgroundColor = "#744521";
        break;
      }
     }
@@ -122,10 +109,21 @@ document.addEventListener("mousemove", (e) => {
   // }
 });
 
-// document.addEventListener("mouseup", () => {
-//     dragging = false;
-//     selected_crop_node = null;
-// });
+document.addEventListener("mouseup", () => {
+    dragging = false;
+    selected_crop_node = null;
+
+    if (chosen_slot != null) {
+      const overlapped_rect = chosen_slot.getBoundingClientRect()
+      const crop_rect = test_crop.getBoundingClientRect()
+
+      test_crop.style.left = overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
+      test_crop.style.top = overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
+
+      chosen_slot.style.backgroundColor = "#996237";
+      overlapped_slots = []
+    }
+});
 
 function getOverlappingElements(targetElement) {
   const allElements = document.querySelectorAll('.slot');

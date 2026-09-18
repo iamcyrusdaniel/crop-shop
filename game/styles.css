@@ -61,13 +61,13 @@ body {
 }
 
 #crop {
-    width: 67px/*calc(((190*1)+10) * 1px)*/;
+    width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
+    max-width: 144px;
     aspect-ratio: 1/1;
-    background-color: gray;
+    background-color: rgb(255, 26, 26);
 
     position: absolute;
     /* translate: -50% -50%; */
-    left: 50%;
 
     cursor: grab;
 }
