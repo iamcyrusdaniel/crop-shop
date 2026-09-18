@@ -7,6 +7,7 @@ var offsetY = 0
 
 var selected_crop_node = null
 var overlapped_slots = []
+var chosen_slot = null
 
 // test_crop.addEventListener("mousemove", (event) => {
 //   if (!dragging) {return}
@@ -25,18 +26,15 @@ var overlapped_slots = []
 test_crop.addEventListener("mousedown", (event) => {
   dragging = !dragging
   if (!dragging) {
-    if (overlapped_slots.length > 0) {
-      const overlapped_rect = overlapped_slots[0].getBoundingClientRect()
+    if (chosen_slot != null) {
+      const overlapped_rect = chosen_slot.getBoundingClientRect()
       const crop_rect = test_crop.getBoundingClientRect()
 
       test_crop.style.left = overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
       test_crop.style.top = overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
 
-      for (slot of overlapped_slots) {
-        slot.style.backgroundColor = "rgb(255, 255, 255)";
-      }
+      chosen_slot.style.backgroundColor = "rgb(255, 255, 255)";
       overlapped_slots = []
-
     }
     return
   }
@@ -57,19 +55,38 @@ document.addEventListener("mousemove", (e) => {
   selected_crop_node.style.left = `${e.clientX-offsetX}px`;
   selected_crop_node.style.top = `${e.clientY-offsetY}px`;
 
-  let overlap_slots = getOverlappingElements(selected_crop_node)
+  const overlap_slots = getOverlappingElements(selected_crop_node)
+
+  // const crop_rect = selected_crop_node.getBoundingClientRect();
+  // const crop_cordsX = e.clientX
+  // const crop_cordsY = e.clientY
+
   if (overlap_slots.length > 0) {
     for (slot of overlap_slots) {
-      slot.style.backgroundColor = "rgb(199, 199, 199)";
-      overlapped_slots.push(slot)
+      // slot.style.backgroundColor = "rgb(199, 199, 199)";
+      // overlapped_slots.push(slot)
+      const slot_rect = slot.getBoundingClientRect();
+
+      // const distance = Math.hypot(crop_cordsX - slot_cordsX, crop_cordsY - slot_cordsY)
+
+      const is_overlaping = e.clientX >= slot_rect.left && e.clientX <= slot_rect.right && e.clientY >= slot_rect.top && e.clientY <= slot_rect.bottom;
+
+      if (is_overlaping) {
+        if (chosen_slot) {
+          chosen_slot.style.backgroundColor = "rgb(255, 255, 255)";
+        }
+       chosen_slot = slot
+       chosen_slot.style.backgroundColor = "rgb(199, 199, 199)";
+       break;
+     }
     }
   }
-  for (slot of overlapped_slots) {
-    if (!overlap_slots.includes(slot)) {
-      slot.style.backgroundColor = "rgb(255, 255, 255)";
-      overlapped_slots.splice(overlapped_slots.indexOf(slot), 1)
-    }
-  }
+  // for (slot of overlapped_slots) {
+  //   if (!overlap_slots.includes(slot)) {
+  //     slot.style.backgroundColor = "rgb(255, 255, 255)";
+  //     overlapped_slots.splice(overlapped_slots.indexOf(slot), 1)
+  //   }
+  // }
   // if (overlapped_slot && overlapped_slot != closest_element) {overlapped_slot.style.backgroundColor = "rgb(255,255,255)"}
   // overlapped_slot = closest_element
   // if (overlapped_slot) {
@@ -110,28 +127,17 @@ document.addEventListener("mousemove", (e) => {
 //     selected_crop_node = null;
 // });
 
-function isOverlapping(element1, element2) {
-  const rect1 = element1.getBoundingClientRect();
-  const rect2 = element2.getBoundingClientRect();
-
-  return !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
-}
-
-// Example usage:
-const boxA = document.getElementById('boxA');
-const boxB = document.getElementById('boxB');
-
-if (isOverlapping(boxA, boxB)) {
-  console.log('The elements are overlapping!');
-}
-
 function getOverlappingElements(targetElement) {
   const allElements = document.querySelectorAll('.slot');
-  const overlaps = [];
+  const overlaps = []
 
-  allElements.forEach((el) => {
-    if (el !== targetElement && isOverlapping(targetElement, el)) {
-      overlaps.push(el);
+  allElements.forEach((element) => {
+    const target_rect = targetElement.getBoundingClientRect();
+    const element_rect = element.getBoundingClientRect();
+    const is_overlaping = !(target_rect.right < element_rect.left || target_rect.left > element_rect.right || target_rect.bottom < element_rect.top || target_rect.top > element_rect.bottom);
+
+    if (element !== targetElement && is_overlaping) {
+      overlaps.push(element);
     }
   });
 
