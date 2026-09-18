@@ -111,18 +111,19 @@ document.addEventListener("mousemove", (e) => {
 
 document.addEventListener("mouseup", () => {
     dragging = false;
-    selected_crop_node = null;
-
+    
     if (chosen_slot != null) {
       const overlapped_rect = chosen_slot.getBoundingClientRect()
-      const crop_rect = test_crop.getBoundingClientRect()
-
-      test_crop.style.left = overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
-      test_crop.style.top = overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
-
+      const crop_rect = selected_crop_node.getBoundingClientRect()
+      
+      selected_crop_node.style.left = overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
+      selected_crop_node.style.top = overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
+      
       chosen_slot.style.backgroundColor = "#996237";
-      overlapped_slots = []
+      overlapped_slots = getOverlappingElements(selected_crop_node)
     }
+
+    selected_crop_node = null;
 });
 
 function getOverlappingElements(targetElement) {
