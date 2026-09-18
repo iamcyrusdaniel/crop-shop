@@ -5,6 +5,10 @@
     font-weight: 1;
 }
 
+.hidden {
+    display: none !important;
+}
+
 :root {
     --child-count: 14;
 }
