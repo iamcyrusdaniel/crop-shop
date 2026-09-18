@@ -11,7 +11,7 @@
 }
 
 :root {
-    --child-count: 14;
+    --child-count: 25;
 }
 
 body {
@@ -83,24 +83,20 @@ body {
     background-color: #824b30;
     width: 60%;
     max-width: 600px;
-
-    translate: -50% -50%;
     position: relative;
-    left: 50%;
-    top: 45%;
-    
     padding: 10px;
-
+    top: 20vh;
     display: grid;
     gap: 7px;
     grid-template-columns: repeat(calc(sqrt(var(--child-count))), 1fr);
 }
+
 .placement-grid .slot {
     box-sizing: border-box;
     width: 100%;
     aspect-ratio: 1/1;
     background-color: #996237;
-    border: solid #5c3b19 7.5px;
+    border: solid #5c3b19 clamp(1px, 1vw, 13px);
 }
 
 #crop {
@@ -108,12 +104,10 @@ body {
     max-width: 144px;
     aspect-ratio: 1/2;
     background-color: rgb(255, 26, 26);
-
     position: absolute;
-    /* translate: -50% -50%; */
-
     cursor: grab;
 }
+
 #crop:active{
     cursor: grabbing;
 }
