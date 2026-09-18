@@ -49,12 +49,27 @@ body {
     background-color: #266F30;
 }
 
-.level-option:hover {
+.close-level-selector {
+    position: absolute;
+    box-sizing: border-box;
+    right: calc(2vw);
+    top: 1.5vw;
+    height: 4.5vw;
+    width: 4.5vw;
+    font-size: 3vw;
+    color: #67D74B;
+    background-color: #824b30;
+    border: 0.5vw solid #5c3b19;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.level-option:hover, .close-level-selector:hover {
     filter: brightness(0.9);
     cursor: pointer;
 }
 
-.level-option:active {
+.level-option:active, .close-level-selector:active {
     filter: brightness(0.7);
     transform: translate(1px, 1px);
 }
