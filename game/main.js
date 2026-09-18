@@ -141,3 +141,10 @@ function getOverlappingElements(targetElement) {
 
   return overlaps;
 }
+
+let selectorClose = document.getElementsByClassName("close-level-selector")[0];
+let levelSelector = document.getElementsByClassName("level-selection-holder")[0];
+console.log(selectorClose, levelSelector);
+selectorClose.addEventListener("click", () => {
+    levelSelector.classList.add("hidden");
+});
