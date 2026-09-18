@@ -11,16 +11,14 @@ var chosen_slot = null
 
 crops.forEach(crop => {
   crop.addEventListener("mousedown", (event) => {
-    dragging = true
+    dragging = true;
 
-    let computedStyles = window.getComputedStyle(crop);
-    let left_pos = computedStyles.left
-    let top_pos = computedStyles.top
+    const crop_rect = crop.getBoundingClientRect();
 
-    offsetX = event.clientX - parseInt(left_pos)
-    offsetY = event.clientY - parseInt(top_pos)
+    offsetX = event.clientX - crop_rect.left;
+    offsetY = event.clientY - crop_rect.top;
 
-    selected_crop_node = crop
+    selected_crop_node = crop;
   });
 })
 document.addEventListener("mousemove", (e) => {
