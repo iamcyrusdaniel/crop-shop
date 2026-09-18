@@ -3,6 +3,7 @@
     margin: 0;
     font-family: fantasy;
     font-weight: 1;
+    user-select: none;
 }
 
 .hidden {
@@ -91,7 +92,7 @@ body {
     padding: 10px;
 
     display: grid;
-    gap: 7.5px;
+    gap: 7px;
     grid-template-columns: repeat(calc(sqrt(var(--child-count))), 1fr);
 }
 .placement-grid .slot {
@@ -105,7 +106,7 @@ body {
 #crop {
     width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
     max-width: 144px;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1/2;
     background-color: rgb(255, 26, 26);
 
     position: absolute;
