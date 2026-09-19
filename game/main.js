@@ -87,5 +87,41 @@ let selectorClose = document.getElementsByClassName("close-level-selector")[0];
 let levelSelector = document.getElementsByClassName("level-selection-holder")[0];
 console.log(selectorClose, levelSelector);
 selectorClose.addEventListener("click", () => {
-    levelSelector.classList.add("hidden");
+  levelSelector.classList.add("hidden");
 });
+
+let cropsDiv = document.querySelector(".crops");
+let levelArrays = [
+  ["tomato"],
+  ["tomato", "tomato"],
+  ["tomato", "carrot"],
+  ["carrot", "tomato", "carrot"],
+  ["watermelon", "watermelon", "watermelon", "watermelon"],
+  ["tomato"],
+  ["tomato"],
+  ["tomato"],
+  ["tomato"],
+  ["tomato"],
+];
+
+let setLevel = (index) => {
+  cropsDiv.replaceChildren();
+  let levelArray = levelArrays[index]
+  levelArray.forEach(crop => {
+    let cropDiv = document.createElement("div");
+    cropDiv.classList.add(crop);
+    cropDiv.classList.add("crop");
+    cropsDiv.append(cropDiv);
+  });
+}
+
+let levelButtons = document.querySelectorAll(".level-option");
+
+let levelButtonselection = () => {
+  levelButtons.forEach((levelButton, index) => {
+    levelButton.addEventListener("click", () => {
+      setLevel(index);
+    });
+  });
+}
+levelButtonselection();
