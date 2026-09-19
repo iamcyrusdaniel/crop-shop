@@ -103,9 +103,20 @@ body {
     width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
     max-width: 144px;
     aspect-ratio: 1/2;
-    background-color: rgb(255, 26, 26);
     position: absolute;
     cursor: grab;
+}
+
+.tomato {
+    background-color: rgb(255, 26, 26);
+}
+
+.carrot {
+    background-color: rgb(255, 156, 26);
+}
+
+.watermelon {
+    background-color: rgb(18, 108, 18);
 }
 
 .crop:active {
