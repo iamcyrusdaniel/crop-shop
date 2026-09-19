@@ -108,6 +108,6 @@ body {
     cursor: grab;
 }
 
-#crop:active{
+.crop:active {
     cursor: grabbing;
 }
