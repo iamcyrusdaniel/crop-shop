@@ -167,7 +167,7 @@ button {
 
 .watermelon {
     background-color: green;
-    border: solid rgb(0, 192, 0) clamp(1px, 1vw, 13px);
+    border: solid rgb(0, 74, 0) clamp(1px, 1vw, 13px);
 }
 
 .crop:active {
