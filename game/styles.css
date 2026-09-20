@@ -106,12 +106,12 @@ button {
     font-weight: bold;
 }
 
-.level-option:hover, .close-level-selector:hover {
+.level-option:hover, .close-level-selector:hover, .menu-title:hover {
     filter: brightness(0.9);
     cursor: pointer;
 }
 
-.level-option:active, .close-level-selector:active {
+.level-option:active, .close-level-selector:active, .menu-title:active {
     filter: brightness(0.7);
     transform: translate(1px, 1px);
 }
