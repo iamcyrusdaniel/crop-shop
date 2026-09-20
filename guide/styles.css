@@ -97,3 +97,22 @@ footer {
     gap: 10px;
 }
 
+#redirectBottom {
+    border: 5px solid #1d5122;
+    font-size: 20px;
+    padding-block: 0;
+}
+
+.fancyButton {
+    color: #67D74B;
+    background-color: #266f30;
+    font-size: 25px;
+    border: 9px solid #1d5122;
+    border-radius: 12px;
+    padding: 10px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
