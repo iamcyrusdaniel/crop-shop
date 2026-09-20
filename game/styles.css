@@ -21,6 +21,29 @@ body {
     background-color: #432222;
 } 
 
+button {
+    cursor:pointer;
+}
+
+.level-selector-toggle {
+    position: absolute;
+    right: 10px;
+    top:10px;
+
+    width: 80px;
+    aspect-ratio: 1/1;
+
+    background: #996237;
+    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+}
+.level-selector-toggle:hover {
+    filter: brightness(0.9);
+}
+.level-selector-toggle:active {
+    filter: brightness(0.7);
+    transform: translate(1px, 1px);
+}
+
 .level-selection-holder {
     position: absolute;
     left: 50%;
@@ -81,11 +104,16 @@ body {
 
 .placement-grid {
     background-color: #824b30;
+
     width: 60%;
     max-width: 600px;
-    position: relative;
     padding: 10px;
-    top: 20vh;
+
+    position: relative;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
     display: grid;
     gap: 7px;
     grid-template-columns: repeat(calc(sqrt(var(--child-count))), 1fr);
@@ -102,10 +130,11 @@ body {
 .crop {
     width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
     max-width: 144px;
-    aspect-ratio: 1/2;
+    aspect-ratio: 1/1;
     position: absolute;
     cursor: grab;
 }
+
 
 .tomato {
     background-color: rgb(255, 26, 26);
@@ -121,4 +150,15 @@ body {
 
 .crop:active {
     cursor: grabbing;
+}
+
+#mouse-selector {
+    width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
+    max-width: 144px;
+    aspect-ratio: 1/1;
+    position: absolute;
+
+    /* background-color: grey; */
+
+    pointer-events: none;
 }
