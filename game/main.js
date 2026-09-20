@@ -180,10 +180,13 @@ let setLevel = (index) => {
 
   cropsDiv.replaceChildren();
   let levelArray = levelArrays[index]
-  levelArray.forEach(crop => {
+  levelArray.forEach((crop, cropIndex) => {
     const cropDiv = document.createElement("div");
+    const backgroundRect = document.querySelector(".background").getBoundingClientRect();
     cropDiv.classList.add(crop);
     cropDiv.classList.add("crop");
+    cropDiv.style.left = `${backgroundRect.left}px`;
+    cropDiv.style.top = `${backgroundRect.top + cropIndex*90}px`;
     const type = crop_types.find(crop_type => {return crop_type.name === crop})
     
     cropsDiv.append(cropDiv);
