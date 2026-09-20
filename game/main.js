@@ -93,7 +93,11 @@ document.addEventListener("mousemove", (e) => {
   
   for (slot of cropOverlap) {
     const slotRect = slot.getBoundingClientRect();
-    const isOverlapping = e.clientX >= slotRect.left && e.clientX <= slotRect.right && e.clientY >= slotRect.top && e.clientY <= slotRect.bottom;
+    const isOverlapping =
+      e.clientX >= slotRect.left &&
+      e.clientX <= slotRect.right &&
+      e.clientY >= slotRect.top &&
+      e.clientY <= slotRect.bottom;
 
     if (isOverlapping) {
       chosenSlot = slot
