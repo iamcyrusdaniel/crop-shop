@@ -69,3 +69,13 @@ footer {
     font-size: 20px;
     padding-block: 0;
 }
+
+.fancyButton:hover, #redirectBottom:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
+}
+
+.fancyButton:active, #redirectBottom:active {
+    filter: brightness(0.7);
+    transform: translate(1px, 1px);
+}
