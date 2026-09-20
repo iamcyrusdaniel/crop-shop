@@ -110,9 +110,6 @@ button {
     padding: 10px;
 
     position: relative;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
 
     display: grid;
     gap: 7px;
@@ -135,6 +132,28 @@ button {
     cursor: grab;
 }
 
+.playing-area {
+    height: fit-content;
+    width: 90%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    max-height: 800px;
+    max-width: 800px;
+}
+
+.background {
+    background: #996237;
+    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+    width: 40%;
+}
 
 .tomato {
     background-color: rgb(255, 26, 26);
