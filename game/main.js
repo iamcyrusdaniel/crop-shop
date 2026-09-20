@@ -150,8 +150,7 @@ document.addEventListener("mouseup", () => {
         averageX += slot_rect.left - (type.width > 1 ? slot_rect.width/2 : 0)
         averageY += slot_rect.top - (type.height > 1 ? slot_rect.height/2 : 0)
       })
-      console.log(averageX / overlapped_slots.length, averageY / overlapped_slots.length)
-      
+            
       selected_crop_node.style.left = averageX / overlapped_slots.length //overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
       selected_crop_node.style.top = averageY / overlapped_slots.length //overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
       
@@ -182,7 +181,6 @@ function getOverlappingElements(targetElement) {
 
 let selectorClose = document.getElementsByClassName("close-level-selector")[0];
 let levelSelector = document.getElementsByClassName("level-selection-holder")[0];
-console.log(selectorClose, levelSelector);
 selectorClose.addEventListener("click", () => {
   levelSelector.classList.add("hidden");
 });
