@@ -171,7 +171,7 @@ selectorClose.addEventListener("click", () => {
 });
 
 function openLevelSelector() {
-  document.getElementsByClassName("level-selection-holder")[0].classList.remove("hidden")
+  document.getElementsByClassName("level-selection-holder")[0].classList.toggle("hidden")
 }
 
 let setLevel = (index) => {
