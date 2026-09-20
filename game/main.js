@@ -201,7 +201,7 @@ let setLevel = (index) => {
     cropDiv.classList.add(crop);
     cropDiv.classList.add("crop");
     cropDiv.style.left = `${backgroundRect.left}px`;
-    cropDiv.style.top = `${backgroundRect.top + cropIndex*90}px`;
+    cropDiv.style.top = `calc(${backgroundRect.top}px + ${cropIndex * 7.5}vh)`;
     const type = crop_types.find(crop_type => {return crop_type.name === crop})
     
     cropsDiv.append(cropDiv);
