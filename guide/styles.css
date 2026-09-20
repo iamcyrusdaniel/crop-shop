@@ -28,3 +28,15 @@ body {
     text-decoration: none;
     color: #67D74B;
 }
+
+#textBody {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    gap: 10vw;
+    padding-right: 20px;
+}
+
