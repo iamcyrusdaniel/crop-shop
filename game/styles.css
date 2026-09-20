@@ -125,7 +125,7 @@ button {
 }
 
 .crop {
-    width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
+    width: calc(6%)/*calc(((190*1)+10) * 1px)*/;
     max-width: 144px;
     aspect-ratio: 1/1;
     position: absolute;
@@ -175,7 +175,7 @@ button {
 }
 
 #mouse-selector {
-    width: calc(10%)/*calc(((190*1)+10) * 1px)*/;
+    width: calc(6%)/*calc(((190*1)+10) * 1px)*/;
     max-width: 144px;
     aspect-ratio: 1/1;
     position: absolute;
