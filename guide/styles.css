@@ -40,3 +40,10 @@ main {
     padding-right: 20px;
 }
 
+#sidebar {
+    background-color: #4d2d28;
+    border-right: 5px solid #5a332d;
+    height: 100vh;
+    padding: 10px;
+}
+
