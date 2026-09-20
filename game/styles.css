@@ -21,6 +21,20 @@ body {
     background-color: #432222;
 } 
 
+.game-menu {
+    padding: 10px;
+    background-color: #4d2d28;
+    border-bottom: 4px solid #5a332d;
+}
+
+.menu-title {
+    font-size: clamp(30px, 4vw, 60px);
+    cursor: pointer;
+    width: fit-content;
+    text-decoration: none;
+    color: #67D74B;
+}
+
 button {
     cursor:pointer;
 }
