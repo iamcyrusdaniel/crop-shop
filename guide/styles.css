@@ -1,0 +1,17 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: fantasy;
+    font-weight: 1;
+    user-select: none;
+    color: #67D74B;
+}
+
+body {
+    background-color: #4d2d28;
+}
+
+.hidden {
+    display: none !important;
+}
+
