@@ -45,13 +45,17 @@ let activateCropHandling = () => {
       const left_pos = element_rect.left
       const top_pos = element_rect.top
 
-      mouse_highlight.style.width = element_rect.width
-      mouse_highlight.style.aspectRatio = element_styles.aspectRatio
-  
+      
       offsetX = event.clientX - parseInt(left_pos)
       offsetY = event.clientY - parseInt(top_pos)
-  
+      
       selected_crop_node = element
+
+      mouse_highlight.style.width = element_rect.width
+      mouse_highlight.style.aspectRatio = element_styles.aspectRatio
+      mouse_highlight.style.left = "0px"
+      mouse_highlight.style.top = "0px"
+      overlapped_slots = []
     });
   });
 }
@@ -105,6 +109,8 @@ document.addEventListener("mousemove", (e) => {
     
     mouse_highlight.style.left = overlapped_rect.left - highlight_offsetX
     mouse_highlight.style.top = overlapped_rect.top - highlight_offsetY
+    mouse_highlight.style.width = selected_crop_node.width
+    mouse_highlight.style.aspectRatio = window.getComputedStyle(selected_crop_node).aspectRatio
   }
   
   const overlap_slots = getOverlappingElements(mouse_highlight)
@@ -126,19 +132,30 @@ document.addEventListener("mouseup", () => {
     dragging = false;
     
     if (chosen_slot != null || selected_crop_node != null) {
-      const overlapped_rect = chosen_slot.getBoundingClientRect()
-      const crop_rect = selected_crop_node.getBoundingClientRect()
+      // const overlapped_rect = chosen_slot.getBoundingClientRect()
+      // const crop_rect = selected_crop_node.getBoundingClientRect()
 
       const highlight_rect = mouse_highlight.getBoundingClientRect();
-      
-      selected_crop_node.style.left = highlight_rect.left//overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
-      selected_crop_node.style.top = highlight_rect.top//overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
-      
-      for (slot of overlapped_slots) {
-        slot.style.backgroundColor = "#996237"
-      }
-      overlapped_slots = []
 
+      let averageX = 0
+      let averageY = 0
+      
+      const type = crop_types.find(crop_type => {return crop_type.name === selected_crop_type})
+      overlapped_slots = getOverlappingElements(mouse_highlight)
+
+      overlapped_slots.forEach((slot) => {
+        slot.style.backgroundColor = "#996237"
+
+        const slot_rect = slot.getBoundingClientRect();
+        averageX += slot_rect.left - (type.width > 1 ? slot_rect.width/2 : 0)
+        averageY += slot_rect.top - (type.height > 1 ? slot_rect.height/2 : 0)
+      })
+      console.log(averageX / overlapped_slots.length, averageY / overlapped_slots.length)
+      
+      selected_crop_node.style.left = averageX / overlapped_slots.length //overlapped_rect.left + ((overlapped_rect.width - crop_rect.width)/2)
+      selected_crop_node.style.top = averageY / overlapped_slots.length //overlapped_rect.top + ((overlapped_rect.height - crop_rect.height)/2)
+      
+      overlapped_slots = []
       // chosen_slot.style.backgroundColor = "#996237";
       // overlapped_slots = getOverlappingElements(selected_crop_node)
     }
