@@ -156,15 +156,18 @@ button {
 }
 
 .tomato {
-    background-color: rgb(255, 26, 26);
+    background-color: red;
+    border: solid rgb(223, 0, 0) clamp(1px, 1vw, 13px);
 }
 
 .carrot {
-    background-color: rgb(255, 156, 26);
+    background-color: orange;
+    border: solid rgb(217, 141, 0) clamp(1px, 1vw, 13px);
 }
 
 .watermelon {
-    background-color: rgb(18, 108, 18);
+    background-color: green;
+    border: solid rgb(0, 192, 0) clamp(1px, 1vw, 13px);
 }
 
 .crop:active {
