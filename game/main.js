@@ -108,10 +108,11 @@ document.addEventListener("mousemove", (e) => {
   if (chosenSlot != null) {
     const overlappedRect = chosenSlot.getBoundingClientRect()
     
+    let nodeRect = selectedCropNode.getBoundingClientRect();
     mouseHighlight.style.left = overlappedRect.left - highlightOffsetX
     mouseHighlight.style.top = overlappedRect.top - highlightOffsetY
-    mouseHighlight.style.width = selectedCropNode.width
-    mouseHighlight.style.aspectRatio = window.getComputedStyle(selectedCropNode).aspectRatio
+    mouseHighlight.style.width = `${nodeRect.width}px`
+    mouseHighlight.style.height = `${nodeRect.height}px`
   }
   
   const overlapSlots = getOverlappingElements(mouseHighlight)
@@ -201,34 +202,30 @@ let setLevel = (index) => {
     
     cropsDiv.append(cropDiv);
     
-    const cropDivRect = cropDiv.getBoundingClientRect();
-    cropDiv.style.width = `${parseInt(cropDivRect.width)*type.width}px`;
-    cropDiv.style.aspectRatio = `${type.width}/${type.height}`;
+    const slotSize = document.querySelector(".slot").getBoundingClientRect();
+    cropDiv.style.width = `${slotSize.width * type.width - Math.min(Math.max(1, 1*window.innerHeight), 13)}px`;
+    cropDiv.style.height = `${slotSize.height * type.height - Math.min(Math.max(1, 1*window.innerHeight), 13)}px`;
 
 
     cropDiv.addEventListener("mousedown", (event) => {
-      dragging = true
+      dragging = true;
+      chosenSlot = null;
   
-      const cropStyles = window.getComputedStyle(cropDiv);
-      // let leftPos = computedStyles.left
-      // let topPos = computedStyles.top
-
       const cropRect = cropDiv.getBoundingClientRect();
-      const leftPos = cropRect.left
-      const topPos = cropRect.top
+      const leftPos = cropRect.left;
+      const topPos = cropRect.top;
+  
+      offsetX = event.clientX - parseInt(leftPos);
+      offsetY = event.clientY - parseInt(topPos);
+  
+      mouseHighlight.style.width = `${cropRect.width}px`;
+      mouseHighlight.style.height = `${cropRect.height}px`;
 
-      mouseHighlight.style.width = cropRect.width
-      mouseHighlight.style.aspectRatio = cropStyles.aspectRatio
-  
-      offsetX = event.clientX - parseInt(leftPos)
-      offsetY = event.clientY - parseInt(topPos)
-  
-      selectedCropNode = cropDiv
-      selectedCropType = crop
+      selectedCropNode = cropDiv;
+      selectedCropType = crop;
     });
   });
-  // activateCropHandling();
-}
+};
 
 let levelButtons = document.querySelectorAll(".level-option");
 
