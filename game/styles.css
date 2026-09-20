@@ -42,9 +42,9 @@ button {
 .level-selector-toggle {
     position: absolute;
     right: 10px;
-    top:10px;
+    top: clamp(70px, 9vw, 110px);
 
-    width: 80px;
+    width: clamp(60px, 10vw, 100px);
     aspect-ratio: 1/1;
 
     background: #996237;
