@@ -48,7 +48,7 @@ button {
     aspect-ratio: 1/1;
 
     background: #996237;
-    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+    border: solid #5c3b19 clamp(1px, 1vw, 10px);
 }
 .level-selector-toggle:hover {
     filter: brightness(0.9);
