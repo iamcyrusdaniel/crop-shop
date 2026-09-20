@@ -84,3 +84,16 @@ main {
     aspect-ratio: 1/1;
 }
 
+footer {
+    margin-top: auto;
+    background-color: #4d2d28;
+    border-top: 4px solid #5a332d;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
