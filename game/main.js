@@ -203,8 +203,8 @@ let setLevel = (index) => {
     cropsDiv.append(cropDiv);
     
     const slotSize = document.querySelector(".slot").getBoundingClientRect();
-    cropDiv.style.width = `${slotSize.width * type.width - Math.min(Math.max(1, 1*window.innerHeight), 13)}px`;
-    cropDiv.style.height = `${slotSize.height * type.height - Math.min(Math.max(1, 1*window.innerHeight), 13)}px`;
+    cropDiv.style.width = `${(slotSize.width * type.width) - Math.min(Math.max(1, 1*window.innerHeight), 22)}px`;
+    cropDiv.style.height = `${(slotSize.height * type.height) - Math.min(Math.max(1, 1*window.innerHeight), 22)}px`;
 
 
     cropDiv.addEventListener("mousedown", (event) => {
