@@ -89,7 +89,7 @@ document.addEventListener("mousemove", (e) => {
   }
 
   
-  const cropOverlap = getOverlappingElements(selectedCropNode)
+  const cropOverlap = getOverlappingElements(selectedCropNode, '.slot')
   
   for (slot of cropOverlap) {
     const slotRect = slot.getBoundingClientRect();
@@ -115,7 +115,7 @@ document.addEventListener("mousemove", (e) => {
     mouseHighlight.style.height = `${nodeRect.height}px`
   }
   
-  const overlapSlots = getOverlappingElements(mouseHighlight)
+  const overlapSlots = getOverlappingElements(mouseHighlight, '.slot')
   if (overlapSlots.length > 0) {
     for (slot of overlappedSlots) {
       if (overlapSlots.indexOf(slot) == -1) {
@@ -134,12 +134,21 @@ document.addEventListener("mouseup", () => {
     dragging = false;
     
     if (chosenSlot != null && selectedCropNode != null) {
+      let overlapping = getOverlappingElements(mouseHighlight, '.crop');
+      let cancel = false;
+      overlapping.forEach((crop) => {
+        if (crop != selectedCropNode) {
+          cancel = true;
+          return;
+        };
+      });
+      if (cancel) {return}
 
       let averageX = 0
       let averageY = 0
 
       const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
-      overlappedSlots = getOverlappingElements(mouseHighlight)
+      overlappedSlots = getOverlappingElements(mouseHighlight, '.slot')
 
       overlappedSlots.forEach((slot) => {
         slot.style.backgroundColor = "#996237"
@@ -158,8 +167,8 @@ document.addEventListener("mouseup", () => {
     selectedCropNode = null;
 });
 
-function getOverlappingElements(targetElement) {
-  const allElements = document.querySelectorAll('.slot');
+function getOverlappingElements(targetElement, selected_class) {
+  const allElements = document.querySelectorAll(selected_class);
   const overlaps = [];
 
   allElements.forEach((element) => {
