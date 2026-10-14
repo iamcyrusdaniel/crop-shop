@@ -257,7 +257,7 @@ let setLevel = (index) => {
     cropDiv.recordedHeight = type.height;
     cropDiv.recordedWidth = type.width;
     
-    cropsDiv.append(cropDiv);
+    document.body.append(cropDiv);
     
     const slotSize = document.querySelector(".slot").getBoundingClientRect();
 
