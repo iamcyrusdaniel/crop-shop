@@ -11,7 +11,7 @@
 }
 
 :root {
-    --child-count: 25;
+    --child-count: 1;
 }
 
 body {
@@ -19,6 +19,8 @@ body {
     height: 100vh;
     color: #67D74B;
     background-color: #432222;
+
+    overflow: hidden;
 } 
 
 .game-menu {
@@ -66,7 +68,7 @@ button {
     display: flex;
     align-items: center;
     flex-direction: column;
-    z-index: 2;
+    z-index: 4;
     height: fit-content;
     width: fit-content;
     background: #996237;
@@ -116,35 +118,6 @@ button {
     transform: translate(1px, 1px);
 }
 
-.placement-grid {
-    background-color: #824b30;
-
-    width: 60%;
-    max-width: 600px;
-    padding: 10px;
-
-    position: relative;
-
-    display: grid;
-    gap: 7px;
-    grid-template-columns: repeat(calc(sqrt(var(--child-count))), 1fr);
-}
-
-.placement-grid .slot {
-    box-sizing: border-box;
-    width: 100%;
-    aspect-ratio: 1/1;
-    background-color: #996237;
-    border: solid #5c3b19 clamp(1px, 1vw, 13px);
-}
-
-.crop {
-    width: calc(4%)/*calc(((190*1)+10) * 1px)*/;
-    max-width: 144px;
-    position: absolute;
-    cursor: grab;
-}
-
 .playing-area {
     height: fit-content;
     width: 90%;
@@ -162,11 +135,71 @@ button {
     max-width: 800px;
 }
 
-.background {
-    background: #996237;
-    border: solid #5c3b19 clamp(1px, 1vw, 13px);
-    width: 40%;
+.placement-grid {
+    /* height: fit-content; */
+    background-color: #824b30;
+    
+    position: relative;
+    left: 50%;
+    top: 40%;
+    translate: -50% -50%;
+
+    width: fit-content;
+    /* max-width: 600px; */
+    padding: 10px;
+
+    justify-items: center;
+    align-items: center; 
+
+    display: grid;
+    gap: 7px;
+    grid-template-rows: repeat(calc(sqrt(var(--child-count))), 1fr);
+    grid-template-columns: repeat(calc(sqrt(var(--child-count))), 1fr);
 }
+
+.placement-grid .slot {
+    box-sizing: border-box;
+    width: 150px;
+    aspect-ratio: 1/1;
+    background-color: #996237;
+    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+}
+#crops {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    translate: -50% 0%;
+
+    z-index: 1;
+    
+    /* background: #996237; */
+    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+    width: 70%;
+    height: 30%;
+    transition: 0.3s;
+}
+#close-background {
+    background: #996237;
+    border: solid #5c3b19 clamp(1px, 0.8vw, 13px);
+
+    color: #5c3b19;
+
+    position: absolute;
+    left: 50%;
+    top: -25%;
+    z-index: 10;
+
+    height: 40px;
+    width: 40px;
+}
+
+.crop {
+    width: calc(4%)/*calc(((190*1)+10) * 1px)*/;
+    max-width: 144px;
+    position: absolute;
+    cursor: grab;
+}
+
 
 .tomato {
     background-color: red;

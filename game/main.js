@@ -1,6 +1,10 @@
 const mouseHighlight = document.getElementById("mouse-selector")
 
+// const closeBackground = document.getElementById("close-background")
+
 var dragging = false
+
+var cropHolderToggle = false
 
 var offsetX = 0
 var offsetY = 0
@@ -16,18 +20,18 @@ const cropTypes = [
   {id:2, name:"watermelon", width:2, height:2},
 ]
 
-const cropsDiv = document.querySelector(".crops");
-let levelArrays = [
-  ["tomato"],
-  ["tomato", "tomato"],
-  ["tomato", "carrot"],
-  ["carrot", "tomato", "carrot"],
-  ["watermelon", "watermelon", "watermelon", "watermelon"],
-  ["carrot", "carrot", "watermelon"],
-  ["tomato"],
-  ["tomato"],
-  ["tomato"],
-  ["tomato"],
+const cropsDiv = document.getElementById("crops");
+let levelArrays = [ // First Array: Crops, Second Number: Grid Size
+  [["tomato"], 1],
+  [["tomato", "tomato"],4],
+  [["tomato", "carrot"], 4],
+  [["carrot", "tomato", "carrot"], 9],
+  [["watermelon", "watermelon", "watermelon", "watermelon"], 16],
+  [["carrot", "carrot", "watermelon"], 9],
+  [["tomato"], 9],
+  [["tomato"], 9],
+  [["tomato"], 9],
+  [["tomato"], 9],
 ];
 
 let activateCropHandling = () => {
@@ -42,11 +46,17 @@ let activateCropHandling = () => {
       const leftPos = elementRect.left
       const topPos = elementRect.top
 
+      console.log("Okay Bro")
+      document.querySelectorAll('.crop').forEach((crop) => {
+        crop.style.zIndex = "1"
+      })
       
       offsetX = event.clientX - parseInt(leftPos)
       offsetY = event.clientY - parseInt(topPos)
       
       selectedCropNode = element
+
+      element.style.zIndex = "2"
 
       mouseHighlight.style.width = elementRect.width
       mouseHighlight.style.aspectRatio = elementStyles.aspectRatio
@@ -56,6 +66,17 @@ let activateCropHandling = () => {
     });
   });
 }
+
+// closeBackground.onmousedown = () => {
+//   cropHolderToggle = !cropHolderToggle
+//   if (cropHolderToggle) {
+//     cropsDiv.style.translate = "-50% 110%"
+//     closeBackground.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-340 343-203q-20 20-48 20t-47-21q-20-20-20-47.5t20-47.5l184-184q9-9 22-14.5t26-5.5q13 0 26 5.5t22 14.5l184 184q20 20 20 47.5T712-204q-20 20-47.5 20T616-204L480-340Zm0-299L343-502q-20 20-48 20t-47-20q-20-20-20-47.5t20-47.5l184-185q9-9 22-14.5t26-5.5q13 0 26 5.5t22 14.5l184 185q20 20 20 47.5T712-502q-20 20-47.5 20T617-502L480-639Z"/></svg>'
+//   }else {
+//     cropsDiv.style.translate = "-50% 0%"
+//     closeBackground.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m480-321 137-137q20-20 48-20t47 20q20 20 20 47.5T712-363L528-178q-9 9-22 14.5t-26 5.5q-13 0-26-5.5T432-178L248-363q-20-20-19.5-48t19.5-47q20-20 48-20t47 20l137 137Zm0-299 137-137q20-20 48-20t47 21q20 20 20 47.5T712-661L528-477q-9 9-22 14.5t-26 5.5q-13 0-26-5.5T432-477L248-661q-20-20-19.5-47.5T248-756q20-21 48-21t48 21l136 136Z"/></svg>'
+//   }
+// }
 
 document.addEventListener("mousemove", (e) => {
   if (!dragging || selectedCropNode == null) {return};
@@ -89,9 +110,7 @@ document.addEventListener("mousemove", (e) => {
   }
   selectedCropNode.recordedWidth = type.width;
   selectedCropNode.recordedHeight = type.height;
-  
   const cropOverlap = getOverlappingElements(selectedCropNode, '.slot')
-  
   for (slot of cropOverlap) {
     const slotRect = slot.getBoundingClientRect();
     const isOverlapping =
@@ -104,6 +123,14 @@ document.addEventListener("mousemove", (e) => {
       chosenSlot = slot
       break;
     }
+    chosenSlot = null;
+    mouseHighlight.style.left = "0px"
+    mouseHighlight.style.right = "0px"
+  }
+  if (cropOverlap.length <= 0) {
+    chosenSlot = null;
+    mouseHighlight.style.left = "0px"
+    mouseHighlight.style.right = "0px"
   }
   
   if (chosenSlot != null) {
@@ -127,6 +154,10 @@ document.addEventListener("mousemove", (e) => {
     for (slot of overlapSlots) {
       slot.style.backgroundColor = "#744521"
     }
+  } else {
+    for (slot of overlappedSlots) {
+      slot.style.backgroundColor = "#996237"
+    }
   }
   overlappedSlots = overlapSlots
 });
@@ -135,7 +166,7 @@ document.addEventListener("mouseup", () => {
     dragging = false;
     
     if (chosenSlot != null && selectedCropNode != null) {
-      let overlapping = getOverlappingElements(mouseHighlight, '.crop');
+      const overlapping = getOverlappingElements(mouseHighlight, '.crop');
       let cancel = false;
       overlapping.forEach((crop) => {
         if (crop != selectedCropNode) {
@@ -196,18 +227,32 @@ function openLevelSelector() {
 }
 
 let setLevel = (index) => {
-  mouseHighlight.style.left = "0%"
-  mouseHighlight.style.top = "0%"
+  mouseHighlight.style.left = "0%";
+  mouseHighlight.style.top = "0%";
+
+  document.documentElement.style.setProperty('--child-count', levelArrays[index][1]);
+  document.querySelectorAll('.crop').forEach(crop => {
+    crop.remove();
+  })
+  document.querySelector('.placement-grid').replaceChildren();
+  for (let i = 0; i < levelArrays[index][1]; i++) {
+    const newSlot = document.createElement("div");
+    newSlot.className = "slot";
+    document.querySelector(".placement-grid").appendChild(newSlot);
+  };
 
   cropsDiv.replaceChildren();
-  let levelArray = levelArrays[index]
+  let levelArray = levelArrays[index][0]
   levelArray.forEach((crop, cropIndex) => {
     const cropDiv = document.createElement("div");
-    const backgroundRect = document.querySelector(".background").getBoundingClientRect();
+    const backgroundRect = cropDiv.getBoundingClientRect();
+    
+    console.log(cropDiv.getBoundingClientRect().left, backgroundRect.top)
+    
     cropDiv.classList.add(crop);
     cropDiv.classList.add("crop");
-    cropDiv.style.left = `${backgroundRect.left}px`;
-    cropDiv.style.top = `calc(${backgroundRect.top}px + ${cropIndex * 7.5}vh)`;
+    cropDiv.style.left = `calc(${backgroundRect.left}px + ${cropIndex * 7.5}vh)`;
+    cropDiv.style.top = `${backgroundRect.top}px`;
     const type = cropTypes.find(cropType => {return cropType.name === crop})
     cropDiv.recordedHeight = type.height;
     cropDiv.recordedWidth = type.width;
