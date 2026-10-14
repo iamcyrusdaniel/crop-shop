@@ -87,7 +87,8 @@ document.addEventListener("mousemove", (e) => {
       highlightOffsetX = slotSize*(type.width/2)
     }
   }
-
+  selectedCropNode.recordedWidth = type.width;
+  selectedCropNode.recordedHeight = type.height;
   
   const cropOverlap = getOverlappingElements(selectedCropNode, '.slot')
   
@@ -208,31 +209,32 @@ let setLevel = (index) => {
     cropDiv.style.left = `${backgroundRect.left}px`;
     cropDiv.style.top = `calc(${backgroundRect.top}px + ${cropIndex * 7.5}vh)`;
     const type = cropTypes.find(cropType => {return cropType.name === crop})
+    cropDiv.recordedHeight = type.height;
+    cropDiv.recordedWidth = type.width;
     
     cropsDiv.append(cropDiv);
     
     const slotSize = document.querySelector(".slot").getBoundingClientRect();
-    cropDiv.style.width = `${(slotSize.width * type.width) - Math.min(Math.max(1, 1*window.innerHeight), 22)}px`;
-    cropDiv.style.height = `${(slotSize.height * type.height) - Math.min(Math.max(1, 1*window.innerHeight), 22)}px`;
 
-
+    
     cropDiv.addEventListener("mousedown", (event) => {
       dragging = true;
       chosenSlot = null;
-  
+      
       const cropRect = cropDiv.getBoundingClientRect();
       const leftPos = cropRect.left;
       const topPos = cropRect.top;
-  
+      
       offsetX = event.clientX - parseInt(leftPos);
       offsetY = event.clientY - parseInt(topPos);
-  
+      
       mouseHighlight.style.width = `${cropRect.width}px`;
       mouseHighlight.style.height = `${cropRect.height}px`;
-
+      
       selectedCropNode = cropDiv;
       selectedCropType = crop;
     });
+    resizeCrop(cropDiv);
   });
 };
 
@@ -247,3 +249,30 @@ let levelButtonselection = () => {
 }
 levelButtonselection();
 setLevel(0);
+
+window.addEventListener("resize", () => {
+  const crops = document.querySelectorAll(".crop");
+  crops.forEach(crop => {
+    resizeCrop(crop)
+  })
+})
+
+ function resizeCrop(crop) {
+  const cropPosition = crop.cropPosition;
+  const cropHeight = crop.recordedHeight;
+  const cropWidth = crop.recordedWidth;
+  const rect = document.querySelector(".slot").getBoundingClientRect();
+  const styles = window.getComputedStyle(crop);
+  const width = 
+    parseFloat(rect.width * cropWidth)
+    - parseFloat(styles.borderLeftWidth)
+    - parseFloat(styles.borderRightWidth)
+  const height =
+    parseFloat(rect.height * cropHeight)
+    - parseFloat(styles.borderTopWidth)
+    - parseFloat(styles.borderBottomWidth)
+  crop.style.height = height + "px"
+  crop.style.width = width + "px"
+  console.log("resized");
+}
+
