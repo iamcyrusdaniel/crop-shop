@@ -182,6 +182,10 @@ document.addEventListener("mouseup", () => {
     const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
     overlappedSlots = getOverlappingElements(mouseHighlight, '.slot')
     
+    const slotCount = type.height*type.width
+    console.log(overlappedSlots.length, slotCount)
+    if (overlappedSlots.length < slotCount) {return;};
+    
     overlappedSlots.forEach((slot) => {
       slot.style.backgroundColor = "#996237"
       
@@ -245,13 +249,13 @@ let setLevel = (index) => {
   let levelArray = levelArrays[index][0]
   levelArray.forEach((crop, cropIndex) => {
     const cropDiv = document.createElement("div");
-    const backgroundRect = cropDiv.getBoundingClientRect();
+    const backgroundRect = cropsDiv.getBoundingClientRect();
     
-    console.log(cropDiv.getBoundingClientRect().left, backgroundRect.top)
+    // console.log(backgroundRect.height, backgroundRect.top)
     
     cropDiv.classList.add(crop);
     cropDiv.classList.add("crop");
-    cropDiv.style.left = `calc(${backgroundRect.left}px + ${cropIndex * 7.5}vh)`;
+    cropDiv.style.left = `calc(${backgroundRect.left}px + ${cropIndex * 20}vh)`;
     cropDiv.style.top = `${backgroundRect.top}px`;
     const type = cropTypes.find(cropType => {return cropType.name === crop})
     cropDiv.recordedHeight = type.height;
@@ -260,7 +264,6 @@ let setLevel = (index) => {
     document.body.append(cropDiv);
     
     const slotSize = document.querySelector(".slot").getBoundingClientRect();
-
     
     cropDiv.addEventListener("mousedown", (event) => {
       dragging = true;
