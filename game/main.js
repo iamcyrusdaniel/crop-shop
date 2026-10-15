@@ -68,58 +68,58 @@ let activateCropHandling = () => {
 }
 
 // closeBackground.onmousedown = () => {
-//   cropHolderToggle = !cropHolderToggle
-//   if (cropHolderToggle) {
-//     cropsDiv.style.translate = "-50% 110%"
-//     closeBackground.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-340 343-203q-20 20-48 20t-47-21q-20-20-20-47.5t20-47.5l184-184q9-9 22-14.5t26-5.5q13 0 26 5.5t22 14.5l184 184q20 20 20 47.5T712-204q-20 20-47.5 20T616-204L480-340Zm0-299L343-502q-20 20-48 20t-47-20q-20-20-20-47.5t20-47.5l184-185q9-9 22-14.5t26-5.5q13 0 26 5.5t22 14.5l184 185q20 20 20 47.5T712-502q-20 20-47.5 20T617-502L480-639Z"/></svg>'
-//   }else {
-//     cropsDiv.style.translate = "-50% 0%"
-//     closeBackground.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m480-321 137-137q20-20 48-20t47 20q20 20 20 47.5T712-363L528-178q-9 9-22 14.5t-26 5.5q-13 0-26-5.5T432-178L248-363q-20-20-19.5-48t19.5-47q20-20 48-20t47 20l137 137Zm0-299 137-137q20-20 48-20t47 21q20 20 20 47.5T712-661L528-477q-9 9-22 14.5t-26 5.5q-13 0-26-5.5T432-477L248-661q-20-20-19.5-47.5T248-756q20-21 48-21t48 21l136 136Z"/></svg>'
-//   }
-// }
-
-document.addEventListener("mousemove", (e) => {
-  if (!dragging || selectedCropNode == null) {return};
-
-  selectedCropNode.style.left = `${e.clientX-offsetX}px`;
-  selectedCropNode.style.top = `${e.clientY-offsetY}px`;
-  
-  let highlightOffsetX = 0
-  let highlightOffsetY = 0
-
-  const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
-  if (type.height > 1) {
-    const nodeRect = selectedCropNode.getBoundingClientRect();
-    const checkPos = (e.clientY-offsetY)+(nodeRect.height/2)
-
-    const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
-
-    if (e.clientY > checkPos) {
-      highlightOffsetY = slotSize*(type.height/2)
-    }
-  }
-  if (type.width > 1) {
-    const nodeRect = selectedCropNode.getBoundingClientRect();
-    const chesPos = (e.clientX-offsetX)+(nodeRect.width/2)
-
-    const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
-
-    if (e.clientX > chesPos) {
-      highlightOffsetX = slotSize*(type.width/2)
-    }
-  }
-  selectedCropNode.recordedWidth = type.width;
-  selectedCropNode.recordedHeight = type.height;
-  const cropOverlap = getOverlappingElements(selectedCropNode, '.slot')
-  for (slot of cropOverlap) {
-    const slotRect = slot.getBoundingClientRect();
-    const isOverlapping =
-      e.clientX >= slotRect.left &&
-      e.clientX <= slotRect.right &&
-      e.clientY >= slotRect.top &&
-      e.clientY <= slotRect.bottom;
-
-    if (isOverlapping) {
+  //   cropHolderToggle = !cropHolderToggle
+  //   if (cropHolderToggle) {
+    //     cropsDiv.style.translate = "-50% 110%"
+    //     closeBackground.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-340 343-203q-20 20-48 20t-47-21q-20-20-20-47.5t20-47.5l184-184q9-9 22-14.5t26-5.5q13 0 26 5.5t22 14.5l184 184q20 20 20 47.5T712-204q-20 20-47.5 20T616-204L480-340Zm0-299L343-502q-20 20-48 20t-47-20q-20-20-20-47.5t20-47.5l184-185q9-9 22-14.5t26-5.5q13 0 26 5.5t22 14.5l184 185q20 20 20 47.5T712-502q-20 20-47.5 20T617-502L480-639Z"/></svg>'
+    //   }else {
+      //     cropsDiv.style.translate = "-50% 0%"
+      //     closeBackground.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m480-321 137-137q20-20 48-20t47 20q20 20 20 47.5T712-363L528-178q-9 9-22 14.5t-26 5.5q-13 0-26-5.5T432-178L248-363q-20-20-19.5-48t19.5-47q20-20 48-20t47 20l137 137Zm0-299 137-137q20-20 48-20t47 21q20 20 20 47.5T712-661L528-477q-9 9-22 14.5t-26 5.5q-13 0-26-5.5T432-477L248-661q-20-20-19.5-47.5T248-756q20-21 48-21t48 21l136 136Z"/></svg>'
+      //   }
+      // }
+      
+      document.addEventListener("mousemove", (e) => {
+        if (!dragging || selectedCropNode == null) {return};
+        
+        selectedCropNode.style.left = `${e.clientX-offsetX}px`;
+        selectedCropNode.style.top = `${e.clientY-offsetY}px`;
+        
+        let highlightOffsetX = 0
+        let highlightOffsetY = 0
+        
+        const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
+        if (type.height > 1) {
+          const nodeRect = selectedCropNode.getBoundingClientRect();
+          const checkPos = (e.clientY-offsetY)+(nodeRect.height/2)
+          
+          const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
+          
+          if (e.clientY > checkPos) {
+            highlightOffsetY = slotSize*(type.height/2)
+          }
+        }
+        if (type.width > 1) {
+          const nodeRect = selectedCropNode.getBoundingClientRect();
+          const chesPos = (e.clientX-offsetX)+(nodeRect.width/2)
+          
+          const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
+          
+          if (e.clientX > chesPos) {
+            highlightOffsetX = slotSize*(type.width/2)
+          }
+        }
+        selectedCropNode.recordedWidth = type.width;
+        selectedCropNode.recordedHeight = type.height;
+        const cropOverlap = getOverlappingElements(selectedCropNode, '.slot')
+        for (slot of cropOverlap) {
+          const slotRect = slot.getBoundingClientRect();
+          const isOverlapping =
+          e.clientX >= slotRect.left &&
+          e.clientX <= slotRect.right &&
+          e.clientY >= slotRect.top &&
+          e.clientY <= slotRect.bottom;
+          
+          if (isOverlapping) {
       chosenSlot = slot
       break;
     }
@@ -150,7 +150,7 @@ document.addEventListener("mousemove", (e) => {
         slot.style.backgroundColor = "#996237"
       }
     }
-
+    
     for (slot of overlapSlots) {
       slot.style.backgroundColor = "#744521"
     }
@@ -163,56 +163,56 @@ document.addEventListener("mousemove", (e) => {
 });
 
 document.addEventListener("mouseup", () => {
-    dragging = false;
+  dragging = false;
+  
+  if (chosenSlot != null && selectedCropNode != null) {
+    const overlapping = getOverlappingElements(mouseHighlight, '.crop');
+    let cancel = false;
+    overlapping.forEach((crop) => {
+      if (crop != selectedCropNode) {
+        cancel = true;
+        return;
+      };
+    });
+    if (cancel) {return}
     
-    if (chosenSlot != null && selectedCropNode != null) {
-      const overlapping = getOverlappingElements(mouseHighlight, '.crop');
-      let cancel = false;
-      overlapping.forEach((crop) => {
-        if (crop != selectedCropNode) {
-          cancel = true;
-          return;
-        };
-      });
-      if (cancel) {return}
-
-      let averageX = 0
-      let averageY = 0
-
-      const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
-      overlappedSlots = getOverlappingElements(mouseHighlight, '.slot')
-
-      overlappedSlots.forEach((slot) => {
-        slot.style.backgroundColor = "#996237"
-
-        const slotRect = slot.getBoundingClientRect();
-        averageX += slotRect.left - (type.width > 1 ? slotRect.width/2 : 0)
-        averageY += slotRect.top - (type.height > 1 ? slotRect.height/2 : 0)
-      })
-
-      selectedCropNode.style.left = averageX / overlappedSlots.length
-      selectedCropNode.style.top = averageY / overlappedSlots.length
-
-      overlappedSlots = []
-    }
-
-    selectedCropNode = null;
+    let averageX = 0
+    let averageY = 0
+    
+    const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
+    overlappedSlots = getOverlappingElements(mouseHighlight, '.slot')
+    
+    overlappedSlots.forEach((slot) => {
+      slot.style.backgroundColor = "#996237"
+      
+      const slotRect = slot.getBoundingClientRect();
+      averageX += slotRect.left - (type.width > 1 ? slotRect.width/2 : 0)
+      averageY += slotRect.top - (type.height > 1 ? slotRect.height/2 : 0)
+    })
+    
+    selectedCropNode.style.left = averageX / overlappedSlots.length
+    selectedCropNode.style.top = averageY / overlappedSlots.length
+    selectedCropNode.cropPosition = chosenSlot
+    overlappedSlots = []
+  }
+  
+  selectedCropNode = null;
 });
 
 function getOverlappingElements(targetElement, selected_class) {
   const allElements = document.querySelectorAll(selected_class);
   const overlaps = [];
-
+  
   allElements.forEach((element) => {
     const targetRect = targetElement.getBoundingClientRect();
     const elementRect = element.getBoundingClientRect();
     const isOverlapping = !(targetRect.right < elementRect.left || targetRect.left > elementRect.right || targetRect.bottom < elementRect.top || targetRect.top > elementRect.bottom);
-
+    
     if (element !== targetElement && isOverlapping) {
       overlaps.push(element);
     }
   });
-
+  
   return overlaps;
 }
 
@@ -240,7 +240,7 @@ let setLevel = (index) => {
     newSlot.className = "slot";
     document.querySelector(".placement-grid").appendChild(newSlot);
   };
-
+  
   cropsDiv.replaceChildren();
   let levelArray = levelArrays[index][0]
   levelArray.forEach((crop, cropIndex) => {
@@ -299,25 +299,34 @@ window.addEventListener("resize", () => {
   const crops = document.querySelectorAll(".crop");
   crops.forEach(crop => {
     resizeCrop(crop)
+    repositionCrop(crop)
   })
 })
 
- function resizeCrop(crop) {
-  const cropPosition = crop.cropPosition;
+function resizeCrop(crop) {
   const cropHeight = crop.recordedHeight;
   const cropWidth = crop.recordedWidth;
   const rect = document.querySelector(".slot").getBoundingClientRect();
   const styles = window.getComputedStyle(crop);
   const width = 
-    parseFloat(rect.width * cropWidth)
-    - parseFloat(styles.borderLeftWidth)
-    - parseFloat(styles.borderRightWidth)
-  const height =
-    parseFloat(rect.height * cropHeight)
-    - parseFloat(styles.borderTopWidth)
-    - parseFloat(styles.borderBottomWidth)
-  crop.style.height = height + "px"
-  crop.style.width = width + "px"
-  console.log("resized");
-}
+  parseFloat(rect.width * cropWidth)
+   - parseFloat(styles.borderLeftWidth)
+   - parseFloat(styles.borderRightWidth)
+   const height =
+   parseFloat(rect.height * cropHeight)
+   - parseFloat(styles.borderTopWidth)
+   - parseFloat(styles.borderBottomWidth)
+   crop.style.height = height + "px"
+   crop.style.width = width + "px"
+   console.log("resized");
+  }
+  
+function repositionCrop(crop) {
+  const cropPosition = crop.cropPosition;
+  if(cropPosition){
+    const slotRect = cropPosition.getBoundingClientRect();
 
+    crop.style.left = slotRect.left + "px";
+    crop.style.top = slotRect.top + "px";
+  }
+}
