@@ -21,17 +21,17 @@ const cropTypes = [
 ]
 
 const cropsDiv = document.getElementById("crops");
-let levelArrays = [ // First Array: Crops, Second Number: Grid Size
-  [["tomato"], 1],
-  [["tomato", "tomato"],4],
-  [["tomato", "carrot"], 4],
-  [["carrot", "tomato", "carrot"], 9],
-  [["watermelon", "watermelon", "watermelon", "watermelon"], 16],
-  [["carrot", "carrot", "watermelon"], 9],
-  [["tomato"], 9],
-  [["tomato"], 9],
-  [["tomato"], 9],
-  [["tomato"], 9],
+let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array: Wall Cordinates
+  [["tomato"], 1,[]],
+  [["tomato", "tomato"],4,[[0,1], [1,0]]],
+  [["tomato", "carrot"], 4,[[1,1]]],
+  [["carrot", "tomato", "carrot"], 9,[]],
+  [["watermelon", "watermelon", "watermelon", "watermelon"], 16,[]],
+  [["carrot", "carrot", "watermelon"], 9,[]],
+  [["tomato"], 9,[]],
+  [["tomato"], 9,[]],
+  [["tomato"], 9,[]],
+  [["tomato"], 9,[]],
 ];
 
 let activateCropHandling = () => {
@@ -169,7 +169,7 @@ document.addEventListener("mouseup", () => {
     const overlapping = getOverlappingElements(mouseHighlight, '.crop');
     let cancel = false;
     overlapping.forEach((crop) => {
-      if (crop != selectedCropNode) {
+      if (crop != selectedCropNode && crop.placed == true) {
         cancel = true;
         return;
       };
@@ -180,24 +180,24 @@ document.addEventListener("mouseup", () => {
     let averageY = 0
     
     const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
-    overlappedSlots = getOverlappingElements(mouseHighlight, '.slot')
+    overlappedSlots = getOverlappingElements(mouseHighlight, '.slot');
     
-    const slotCount = type.height*type.width
-    console.log(overlappedSlots.length, slotCount)
+    const slotCount = type.height*type.width;
     if (overlappedSlots.length < slotCount) {return;};
     
     overlappedSlots.forEach((slot) => {
-      slot.style.backgroundColor = "#996237"
+      slot.style.backgroundColor = "#996237";
       
       const slotRect = slot.getBoundingClientRect();
       averageX += slotRect.left - (type.width > 1 ? slotRect.width/2 : 0)
       averageY += slotRect.top - (type.height > 1 ? slotRect.height/2 : 0)
     })
     
-    selectedCropNode.style.left = averageX / overlappedSlots.length
-    selectedCropNode.style.top = averageY / overlappedSlots.length
-    selectedCropNode.cropPosition = chosenSlot
-    overlappedSlots = []
+    selectedCropNode.style.left = averageX / overlappedSlots.length;
+    selectedCropNode.style.top = averageY / overlappedSlots.length;
+    selectedCropNode.cropPosition = chosenSlot;
+    selectedCropNode.placed = true;
+    overlappedSlots = [];
   }
   
   selectedCropNode = null;
@@ -239,9 +239,27 @@ let setLevel = (index) => {
     crop.remove();
   })
   document.querySelector('.placement-grid').replaceChildren();
+  let currentCords = [0,0]
+  const laneSize = Math.sqrt(levelArrays[index][1])
   for (let i = 0; i < levelArrays[index][1]; i++) {
+    // currentCords = [0,0]
     const newSlot = document.createElement("div");
-    newSlot.className = "slot";
+    let isWall = false;
+    if (levelArrays[index][2].length > 0) {
+      levelArrays[index][2].forEach(cord => {
+        console.log(currentCords == cord)
+        if (currentCords[0] == cord[0] && currentCords[1] == cord[1]) {
+          isWall = true;
+        }
+      })
+    }
+    if (currentCords[0] < laneSize-1) {
+      currentCords[0]++;
+    } else {
+      currentCords[0] = 0;
+      currentCords[1]++;
+    }
+    if (isWall) {newSlot.className = "wall";} else {newSlot.className = "slot";}
     document.querySelector(".placement-grid").appendChild(newSlot);
   };
   
@@ -260,6 +278,7 @@ let setLevel = (index) => {
     const type = cropTypes.find(cropType => {return cropType.name === crop})
     cropDiv.recordedHeight = type.height;
     cropDiv.recordedWidth = type.width;
+    cropDiv.placed = false;
     
     document.body.append(cropDiv);
     
@@ -268,6 +287,7 @@ let setLevel = (index) => {
     cropDiv.addEventListener("mousedown", (event) => {
       dragging = true;
       chosenSlot = null;
+      cropDiv.placed = false;
       
       const cropRect = cropDiv.getBoundingClientRect();
       const leftPos = cropRect.left;
@@ -315,10 +335,10 @@ function resizeCrop(crop) {
   parseFloat(rect.width * cropWidth)
    - parseFloat(styles.borderLeftWidth)
    - parseFloat(styles.borderRightWidth)
-   const height =
-   parseFloat(rect.height * cropHeight)
-   - parseFloat(styles.borderTopWidth)
-   - parseFloat(styles.borderBottomWidth)
+  const height =
+  parseFloat(rect.height * cropHeight)
+  - parseFloat(styles.borderTopWidth)
+  - parseFloat(styles.borderBottomWidth)
    crop.style.height = height + "px"
    crop.style.width = width + "px"
    console.log("resized");

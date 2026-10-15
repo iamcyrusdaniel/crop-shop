@@ -152,7 +152,6 @@ button {
     grid-template-rows: repeat(calc(sqrt(var(--child-count))), 1fr);
     grid-template-columns: repeat(calc(sqrt(var(--child-count))), 1fr);
 }
-
 .placement-grid .slot {
     box-sizing: border-box;
     width: 150px;
@@ -160,6 +159,14 @@ button {
     background-color: #996237;
     border: solid #5c3b19 clamp(1px, 1vw, 13px);
 }
+.placement-grid .wall {
+    box-sizing: border-box;
+    width: 150px;
+    aspect-ratio: 1/1;
+    background-color: #5c3b19;
+    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+}
+
 #crops {
     position: absolute;
     left: 50%;
