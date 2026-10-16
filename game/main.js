@@ -124,13 +124,13 @@ let activateCropHandling = () => {
       break;
     }
     chosenSlot = null;
-    mouseHighlight.style.left = "0px"
-    mouseHighlight.style.right = "0px"
+    mouseHighlight.style.left = "-150px";
+    mouseHighlight.style.right = "-150px";
   }
   if (cropOverlap.length <= 0) {
     chosenSlot = null;
-    mouseHighlight.style.left = "0px"
-    mouseHighlight.style.right = "0px"
+    mouseHighlight.style.left = "-150px";
+    mouseHighlight.style.right = "-150px";
   }
   
   if (chosenSlot != null) {
