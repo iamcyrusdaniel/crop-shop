@@ -233,7 +233,8 @@ selectorClose.addEventListener("click", () => {
 });
 
 function openLevelSelector() {
-  document.getElementsByClassName("level-selection-holder")[0].classList.toggle("hidden")
+  let levelSelector = document.querySelector(".level-selection-holder");
+  levelSelector.classList.toggle("hidden");
 }
 
 let setLevel = (index) => {
