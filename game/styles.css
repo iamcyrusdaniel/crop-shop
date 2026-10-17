@@ -131,6 +131,10 @@ button {
     max-height: 800px;
     max-width: 800px;
 }
+#submit {
+    position: absolute;
+    z-index: 20;
+}
 
 .placement-grid {
     /* height: fit-content; */
@@ -217,18 +221,20 @@ button {
     background-color: green;
     border: solid rgb(0, 74, 0) clamp(1px, 1vw, 13px);
 }
+.beetroot {
+    background-color: rgb(128, 0, 128);
+    border: solid rgb(68, 0, 68) clamp(1px, 1vw, 13px);
+}
 
 .crop:active {
     cursor: grabbing;
 }
 
 #mouse-selector {
-    width: calc(6%)/*calc(((190*1)+10) * 1px)*/;
-    max-width: 144px;
     aspect-ratio: 1/1;
     position: absolute;
 
-    /* background-color: grey; */
+    /* background-color: rgba(128, 128, 128, 0.315); */
 
     pointer-events: none;
 }

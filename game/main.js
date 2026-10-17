@@ -18,6 +18,7 @@ const cropTypes = [
   {id:0, name:"tomato", width:1, height:1},
   {id:1, name:"carrot", width:1, height:2},
   {id:2, name:"watermelon", width:2, height:2},
+  {id:3, name:"beetroot", width:2, height:1},
 ]
 
 const cropsDiv = document.getElementById("crops");
@@ -25,9 +26,9 @@ let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array
   [["tomato"], 1,[]],
   [["tomato", "tomato"],4,[[0,1], [1,0]]],
   [["tomato", "carrot"], 4,[[1,1]]],
-  [["carrot", "tomato", "carrot"], 9,[]],
-  [["watermelon", "watermelon", "watermelon", "watermelon"], 16,[]],
-  [["carrot", "carrot", "watermelon"], 9,[]],
+  [["carrot", "tomato", "carrot"], 9,[[0,1],[1,2],[2,0]]],
+  [["watermelon", "watermelon", "beetroot", "carrot"], 16,[[2,0],[3,0],[1,2],[1,3]]],
+  [["carrot", "carrot", "beetroot","tomato"], 9,[[0,2],[2,0]]],
   [["tomato"], 9,[]],
   [["tomato"], 9,[]],
   [["tomato"], 9,[]],
@@ -250,7 +251,6 @@ let setLevel = (index) => {
     let isWall = false;
     if (levelArrays[index][2].length > 0) {
       levelArrays[index][2].forEach(cord => {
-        console.log(currentCords == cord)
         if (currentCords[0] == cord[0] && currentCords[1] == cord[1]) {
           isWall = true;
         }
