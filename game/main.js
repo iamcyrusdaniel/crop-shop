@@ -29,6 +29,18 @@ document.addEventListener("click", () => {
   backgroundMusic.volume = 0.5;
 }, {once: true});
 
+let musicButton = document.getElementById("musicButton");
+function musicToggle() {
+  musicButton.addEventListener("click", () => {
+    if(backgroundMusic.paused){
+      backgroundMusic.play();
+    } else {
+      backgroundMusic.pause();
+    }
+  })
+};
+musicToggle();
+
 const cropsDiv = document.getElementById("crops");
 let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array: Wall Cordinates
   [["tomato"], 1,[]],
