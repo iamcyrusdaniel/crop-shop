@@ -39,7 +39,7 @@ let activateCropHandling = () => {
   crops.forEach(element => {
     element.addEventListener("mousedown", (event) => {
       dragging = true
-  
+
       const elementStyles = window.getComputedStyle(element);
 
       const elementRect = element.getBoundingClientRect();
@@ -83,7 +83,8 @@ let activateCropHandling = () => {
         
         selectedCropNode.style.left = `${e.clientX-offsetX}px`;
         selectedCropNode.style.top = `${e.clientY-offsetY}px`;
-        
+        selectedCropNode.classList.remove("placed");
+
         let highlightOffsetX = 0
         let highlightOffsetY = 0
         
@@ -176,6 +177,8 @@ document.addEventListener("mouseup", () => {
     });
     if (cancel) {return}
     
+    selectedCropNode.classList.add("placed")
+
     let averageX = 0
     let averageY = 0
     
