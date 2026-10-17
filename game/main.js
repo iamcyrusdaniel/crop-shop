@@ -429,6 +429,31 @@ function levelWin() {
 
   soundEffect.play();
   showWinScreen(true);
+
+  confetti({
+    particleCount: 150,
+    spread: 130,
+    origin: {y: 0},
+    startVelocity: 50,
+    ticks: 100,
+    gravity: 10,
+  })
+  confetti({
+    particleCount: 150,
+    spread: 360,
+    origin: {y: 0},
+    startVelocity: 20,
+    ticks: 100,
+    gravity: 10,
+  })
+  confetti({
+    particleCount: 150,
+    spread: 360,
+    origin: {y: 0},
+    startVelocity: 50,
+    ticks: 100,
+    gravity: 10,
+  })
 }
 
 const loseSoundEffects = [
