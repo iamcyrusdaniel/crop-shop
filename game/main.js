@@ -235,6 +235,9 @@ selectorClose.addEventListener("click", () => {
 function openLevelSelector() {
   let levelSelector = document.querySelector(".level-selection-holder");
   levelSelector.classList.toggle("hidden");
+  if(!levelSelector.classList.contains("hidden")) {
+    showWinScreen(false);
+  }
 }
 
 let setLevel = (index) => {
@@ -441,4 +444,28 @@ function levelLose() {
   soundEffect.play();
 }
 
+const winScreen = document.getElementById("winScreen");
+function showWinScreen(show) {
+  if(show) {
+    winScreen.classList.remove("hidden");
+  } else {
+    winScreen.classList.add("hidden");
+  }
 }
+
+const retryButton = document.getElementById("retryButton");
+const nextButton = document.getElementById("nextButton");
+function winScreenButtons() {
+  retryButton.addEventListener("click", () => {
+    showWinScreen(false);
+    setLevel(level);
+  })
+  nextButton.addEventListener("click", () => {
+    showWinScreen(false);
+    let levelButtonCount = document.querySelectorAll(".level-option").length;
+    if(level + 1 < levelButtonCount) {
+      setLevel(level + 1);
+    }
+  })
+}
+winScreenButtons();
