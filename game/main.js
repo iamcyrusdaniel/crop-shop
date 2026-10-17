@@ -2,6 +2,11 @@ const mouseHighlight = document.getElementById("mouse-selector")
 
 // const closeBackground = document.getElementById("close-background")
 
+const actionSounds = {
+  pickup: new Audio("../assets/actions/pickup.mp3"),
+  placed: new Audio("../assets/actions/placed.mp3"),
+}
+
 let level = 0
 let levelText = document.getElementById("levelText");
 
@@ -200,6 +205,10 @@ document.addEventListener("mouseup", () => {
     if (cancel) {return}
     
     selectedCropNode.classList.add("placed")
+    let placed = actionSounds.placed
+    placed.currentTime = 0
+    placed.volume = 0.5
+    placed.play()
 
     let averageX = 0
     let averageY = 0
@@ -319,7 +328,11 @@ let setLevel = (index) => {
       dragging = true;
       chosenSlot = null;
       cropDiv.placed = false;
-      
+
+      let pickup = actionSounds.pickup;
+      pickup.currentTime = 0;
+      pickup.play();
+
       const cropRect = cropDiv.getBoundingClientRect();
       const leftPos = cropRect.left;
       const topPos = cropRect.top;
