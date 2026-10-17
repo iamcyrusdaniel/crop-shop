@@ -2,6 +2,9 @@ const mouseHighlight = document.getElementById("mouse-selector")
 
 // const closeBackground = document.getElementById("close-background")
 
+let level = 0
+let levelText = document.getElementById("levelText");
+
 var dragging = false
 
 var cropHolderToggle = false
@@ -20,6 +23,24 @@ const cropTypes = [
   {id:2, name:"watermelon", width:2, height:2},
   {id:3, name:"beetroot", width:2, height:1},
 ]
+
+let backgroundMusic = document.getElementById("backgroundMusic");
+document.addEventListener("click", () => {
+  backgroundMusic.play();
+  backgroundMusic.volume = 0.5;
+}, {once: true});
+
+let musicButton = document.getElementById("musicButton");
+function musicToggle() {
+  musicButton.addEventListener("click", () => {
+    if(backgroundMusic.paused){
+      backgroundMusic.play();
+    } else {
+      backgroundMusic.pause();
+    }
+  })
+};
+musicToggle();
 
 const cropsDiv = document.getElementById("crops");
 let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array: Wall Cordinates
@@ -231,10 +252,17 @@ selectorClose.addEventListener("click", () => {
 });
 
 function openLevelSelector() {
-  document.getElementsByClassName("level-selection-holder")[0].classList.toggle("hidden")
+  let levelSelector = document.querySelector(".level-selection-holder");
+  levelSelector.classList.toggle("hidden");
+  if(!levelSelector.classList.contains("hidden")) {
+    showWinScreen(false);
+  }
 }
 
 let setLevel = (index) => {
+  level = index
+  levelText.innerText = `level ${level+1}`
+
   mouseHighlight.style.left = "0%";
   mouseHighlight.style.top = "0%";
 
@@ -378,33 +406,49 @@ function submitButton() {
 submitButton();
 
 const winSoundEffects = [
+  new Audio("../assets/win/yay.mp3"),  
+  new Audio("../assets/win/yippee.mp3"),  
   new Audio("../assets/win/youWon.mp3"),
 ]
 const winVolumes = [
   1,
+  1,
+  1,
 ]
+
 function levelWin() {
+  winSoundEffects.forEach(sound => {
+    sound.pause();
+    sound.currentTime = 0;
+  })
+
   const randomNumber = Math.floor(Math.random() * winSoundEffects.length);
 
   const soundEffect = winSoundEffects[randomNumber];
   soundEffect.volume = winVolumes[randomNumber];
 
   soundEffect.play();
-  console.log("CONGRATULATIONS YOU WON!")
+  showWinScreen(true);
 }
 
 const loseSoundEffects = [
+  new Audio("../assets/loss/deathBell.mp3"),
   new Audio("../assets/loss/emotionalDamage.mp3"),
   new Audio("../assets/loss/failure.mp3"),
   new Audio("../assets/loss/jesus.mp3"),
+  new Audio("../assets/loss/vineBoom.mp3"),
+  new Audio("../assets/loss/wrong.mp3"),
 ]
 const loseVolumes = [
+  0.3,
   0.15,
   0.3,
   1,
+  0.4,
+  0.4,
 ]
-function levelLose() {
 
+function levelLose() {
   loseSoundEffects.forEach(sound => {
     sound.pause();
     sound.currentTime = 0;
@@ -415,6 +459,31 @@ function levelLose() {
   const soundEffect = loseSoundEffects[randomNumber];
   soundEffect.volume = loseVolumes[randomNumber];
 
-  soundEffect.play()
-  console.log("CONGRATULATIONS YOU LOST!")
+  soundEffect.play();
 }
+
+const winScreen = document.getElementById("winScreen");
+function showWinScreen(show) {
+  if(show) {
+    winScreen.classList.remove("hidden");
+  } else {
+    winScreen.classList.add("hidden");
+  }
+}
+
+const retryButton = document.getElementById("retryButton");
+const nextButton = document.getElementById("nextButton");
+function winScreenButtons() {
+  retryButton.addEventListener("click", () => {
+    showWinScreen(false);
+    setLevel(level);
+  })
+  nextButton.addEventListener("click", () => {
+    showWinScreen(false);
+    let levelButtonCount = document.querySelectorAll(".level-option").length;
+    if(level + 1 < levelButtonCount) {
+      setLevel(level + 1);
+    }
+  })
+}
+winScreenButtons();

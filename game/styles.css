@@ -60,7 +60,7 @@ button {
     transform: translate(1px, 1px);
 }
 
-.level-selection-holder {
+.level-selection-holder, #winScreen {
     position: absolute;
     left: 50%;
     top: 50%;
