@@ -385,33 +385,49 @@ function submitButton() {
 submitButton();
 
 const winSoundEffects = [
+  new Audio("../assets/win/yay.mp3"),  
+  new Audio("../assets/win/yippee.mp3"),  
   new Audio("../assets/win/youWon.mp3"),
 ]
 const winVolumes = [
   1,
+  1,
+  1,
 ]
+
 function levelWin() {
+  winSoundEffects.forEach(sound => {
+    sound.pause();
+    sound.currentTime = 0;
+  })
+
   const randomNumber = Math.floor(Math.random() * winSoundEffects.length);
 
   const soundEffect = winSoundEffects[randomNumber];
   soundEffect.volume = winVolumes[randomNumber];
 
   soundEffect.play();
-  console.log("CONGRATULATIONS YOU WON!")
+  showWinScreen(true);
 }
 
 const loseSoundEffects = [
+  new Audio("../assets/loss/deathBell.mp3"),
   new Audio("../assets/loss/emotionalDamage.mp3"),
   new Audio("../assets/loss/failure.mp3"),
   new Audio("../assets/loss/jesus.mp3"),
+  new Audio("../assets/loss/vineBoom.mp3"),
+  new Audio("../assets/loss/wrong.mp3"),
 ]
 const loseVolumes = [
+  0.3,
   0.15,
   0.3,
   1,
+  0.4,
+  0.4,
 ]
-function levelLose() {
 
+function levelLose() {
   loseSoundEffects.forEach(sound => {
     sound.pause();
     sound.currentTime = 0;
@@ -422,6 +438,7 @@ function levelLose() {
   const soundEffect = loseSoundEffects[randomNumber];
   soundEffect.volume = loseVolumes[randomNumber];
 
-  soundEffect.play()
-  console.log("CONGRATULATIONS YOU LOST!")
+  soundEffect.play();
+}
+
 }
