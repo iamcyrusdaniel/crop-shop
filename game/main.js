@@ -377,3 +377,44 @@ function submitButton() {
 }
 submitButton();
 
+const winSoundEffects = [
+  new Audio("../assets/win/youWon.mp3"),
+]
+const winVolumes = [
+  1,
+]
+function levelWin() {
+  const randomNumber = Math.floor(Math.random() * winSoundEffects.length);
+
+  const soundEffect = winSoundEffects[randomNumber];
+  soundEffect.volume = winVolumes[randomNumber];
+
+  soundEffect.play();
+  console.log("CONGRATULATIONS YOU WON!")
+}
+
+const loseSoundEffects = [
+  new Audio("../assets/loss/emotionalDamage.mp3"),
+  new Audio("../assets/loss/failure.mp3"),
+  new Audio("../assets/loss/jesus.mp3"),
+]
+const loseVolumes = [
+  0.15,
+  0.3,
+  1,
+]
+function levelLose() {
+
+  loseSoundEffects.forEach(sound => {
+    sound.pause();
+    sound.currentTime = 0;
+  })
+  
+  const randomNumber = Math.floor(Math.random() * loseSoundEffects.length);
+
+  const soundEffect = loseSoundEffects[randomNumber];
+  soundEffect.volume = loseVolumes[randomNumber];
+
+  soundEffect.play()
+  console.log("CONGRATULATIONS YOU LOST!")
+}
