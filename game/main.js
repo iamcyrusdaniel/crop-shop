@@ -23,6 +23,12 @@ const cropTypes = [
   {id:2, name:"watermelon", width:2, height:2},
 ]
 
+let backgroundMusic = document.getElementById("backgroundMusic");
+document.addEventListener("click", () => {
+  backgroundMusic.play();
+  backgroundMusic.volume = 0.5;
+}, {once: true});
+
 const cropsDiv = document.getElementById("crops");
 let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array: Wall Cordinates
   [["tomato"], 1,[]],
