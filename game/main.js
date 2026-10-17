@@ -2,6 +2,9 @@ const mouseHighlight = document.getElementById("mouse-selector")
 
 // const closeBackground = document.getElementById("close-background")
 
+let level = 0
+let levelText = document.getElementById("levelText");
+
 var dragging = false
 
 var cropHolderToggle = false
@@ -234,6 +237,9 @@ function openLevelSelector() {
 }
 
 let setLevel = (index) => {
+  level = index
+  levelText.innerText = `level ${level+1}`
+
   mouseHighlight.style.left = "0%";
   mouseHighlight.style.top = "0%";
 
