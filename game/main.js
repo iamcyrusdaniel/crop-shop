@@ -356,3 +356,24 @@ function repositionCrop(crop) {
     crop.style.top = slotRect.top + "px";
   }
 }
+
+function submitButton() {
+  const submitButton = document.querySelector("#submit");
+  submitButton.addEventListener("click", (click) => {
+    const crops = document.querySelectorAll(".crop");
+    let failed = false;
+    crops.forEach(crop => {
+      if(!crop.classList.contains("placed")){
+        failed = true;
+      }
+    })
+    if(failed){
+      levelLose()
+    }
+    else {
+      levelWin()
+    }
+  })
+}
+submitButton();
+
