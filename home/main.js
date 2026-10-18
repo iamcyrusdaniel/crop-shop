@@ -1,6 +1,6 @@
 let grassContainer = document.querySelector(".grass");
 
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 100; i++) {
     let grassParticle = document.createElement("div");
     grassParticle.style.width = "7.5px";
     grassParticle.style.height = `${Math.max(20, Math.ceil(Math.random()*40))}px`;

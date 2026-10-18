@@ -53,8 +53,8 @@ let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array
   [["carrot", "tomato", "carrot"], 9,[[0,1],[1,2],[2,0]]],
   [["watermelon", "watermelon", "beetroot", "carrot"], 16,[[2,0],[3,0],[1,2],[1,3]]],
   [["carrot", "carrot", "beetroot","tomato"], 9,[[0,2],[2,0]]],
-  [["tomato"], 9,[]],
-  [["tomato"], 9,[]],
+  [["carrot", "carrot", "carrot", "beetroot", "watermelon", "watermelon", "tomato"], 25,[[0,0],[1,0],[0,4],[2,3],[4,0],[4,4]]],
+  [["tomato","tomato","carrot","carrot","watermelon","beetroot","beetroot"], 16,[[1,3],[1,0]]],
   [["tomato"], 9,[]],
   [["tomato"], 9,[]],
 ];
