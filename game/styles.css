@@ -133,6 +133,8 @@ button {
 }
 #submit {
     position: absolute;
+    left: 100%;
+    top: 50%;
     z-index: 20;
 }
 
@@ -144,7 +146,7 @@ button {
     left: 50%;
     translate: -50% 0%;
 
-    width: 70%;
+    height: 60vh;
     aspect-ratio: 1/1;
     /* max-width: 600px; */
     padding: 10px;
@@ -177,8 +179,6 @@ button {
     left: 50%;
     bottom: 20px;
     translate: -50% 0%;
-
-    z-index: 0;
     
     /* background: #996237; */
     /* border: solid #5c3b19 clamp(1px, 1vw, 13px); */

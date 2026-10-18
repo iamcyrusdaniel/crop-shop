@@ -385,25 +385,22 @@ function repositionCrop(crop) {
   }
 }
 
-function submitButton() {
-  const submitButton = document.querySelector("#submit");
-  submitButton.addEventListener("click", (click) => {
-    const crops = document.querySelectorAll(".crop");
-    let failed = false;
-    crops.forEach(crop => {
-      if(!crop.classList.contains("placed")){
-        failed = true;
-      }
-    })
-    if(failed){
-      levelLose()
-    }
-    else {
-      levelWin()
+const submitButton = document.querySelector("#submit");
+submitButton.addEventListener("click", () => {
+  const crops = document.querySelectorAll(".crop");
+  let failed = false;
+  crops.forEach(crop => {
+    if(!crop.classList.contains("placed")){
+      failed = true;
     }
   })
-}
-submitButton();
+  if(failed){
+    levelLose()
+  }
+  else {
+    levelWin()
+  }
+})
 
 const winSoundEffects = [
   new Audio("../assets/win/yay.mp3"),  
@@ -421,11 +418,10 @@ function levelWin() {
     sound.pause();
     sound.currentTime = 0;
   })
-
-  const randomNumber = Math.floor(Math.random() * winSoundEffects.length);
+  const randomNumber =  Math.floor(Math.random() * winSoundEffects.length);
 
   const soundEffect = winSoundEffects[randomNumber];
-  soundEffect.volume = winVolumes[randomNumber];
+  // soundEffect.volume = winVolumes[randomNumber];
 
   soundEffect.play();
   showWinScreen(true);
@@ -457,7 +453,7 @@ function levelLose() {
   const randomNumber = Math.floor(Math.random() * loseSoundEffects.length);
 
   const soundEffect = loseSoundEffects[randomNumber];
-  soundEffect.volume = loseVolumes[randomNumber];
+  // soundEffect.volume = loseVolumes[randomNumber];
 
   soundEffect.play();
 }
