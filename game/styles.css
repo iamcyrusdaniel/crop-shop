@@ -52,14 +52,24 @@ body {
 }
 
 button {
-    cursor:pointer;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
+}
+
+button:active {
+    filter: brightness(0.7);
+    transform: translate(1px, 1px);
 }
 
 .level-selector-toggle {
     position: absolute;
     right: 10px;
     top: clamp(70px, 9vw, 110px);
-
+    
     width: clamp(60px, 10vw, 100px);
     aspect-ratio: 1/1;
 
@@ -156,16 +166,6 @@ button {
     border: 0.5vw solid #5c3b19;
     font-family: monospace;
     font-weight: bold;
-}
-
-.level-option:hover, .close-level-selector:hover, .menu-title:hover {
-    filter: brightness(0.9);
-    cursor: pointer;
-}
-
-.level-option:active, .close-level-selector:active, .menu-title:active {
-    filter: brightness(0.7);
-    transform: translate(1px, 1px);
 }
 
 .playing-area {
