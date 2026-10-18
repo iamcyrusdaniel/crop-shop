@@ -414,7 +414,7 @@ const winSoundEffects = [
   new Audio("../assets/win/youWon.mp3"),
 ]
 const winVolumes = [
-  1,
+  0.5,
   1,
   1,
 ]
