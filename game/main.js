@@ -492,8 +492,10 @@ function levelLose() {
 const winScreen = document.getElementById("winScreen");
 function showWinScreen(show) {
   if(show) {
+    submitButton.classList.add("hidden");
     winScreen.classList.remove("hidden");
   } else {
+    submitButton.classList.remove("hidden");
     winScreen.classList.add("hidden");
   }
 }
