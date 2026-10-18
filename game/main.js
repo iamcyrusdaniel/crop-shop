@@ -71,7 +71,6 @@ let activateCropHandling = () => {
       const leftPos = elementRect.left
       const topPos = elementRect.top
 
-      console.log("Okay Bro")
       document.querySelectorAll('.crop').forEach((crop) => {
         crop.style.zIndex = "1"
       })
@@ -212,7 +211,6 @@ document.addEventListener("mouseup", () => {
     placed.currentTime = 0
     placed.volume = 0.5
     placed.play()
-    console.log("lalala")
     
     let averageX = 0
     let averageY = 0
@@ -306,9 +304,7 @@ let setLevel = (index) => {
   levelArray.forEach((crop, cropIndex) => {
     const cropDiv = document.createElement("div");
     const backgroundRect = cropsDiv.getBoundingClientRect();
-    
-    // console.log(backgroundRect.height, backgroundRect.top)
-    
+        
     cropDiv.classList.add(crop);
     cropDiv.classList.add("crop");
     cropDiv.style.left = `calc(${backgroundRect.left}px + ${cropIndex * 20}vh)`;
@@ -383,7 +379,6 @@ function resizeCrop(crop) {
   - parseFloat(styles.borderBottomWidth)
    crop.style.height = height + "px"
    crop.style.width = width + "px"
-   console.log("resized");
   }
   
 function repositionCrop(crop) {
