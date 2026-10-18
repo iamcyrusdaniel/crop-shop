@@ -105,70 +105,68 @@ let activateCropHandling = () => {
       //   }
       // }
       
-      document.addEventListener("mousemove", (e) => {
-        if (!dragging || selectedCropNode == null) {return};
-        
-        selectedCropNode.style.left = `${e.clientX-offsetX}px`;
-        selectedCropNode.style.top = `${e.clientY-offsetY}px`;
-        selectedCropNode.classList.remove("placed");
+document.addEventListener("mousemove", (e) => {
+  if (!dragging || selectedCropNode == null) {return};
+  
+  selectedCropNode.style.left = `${e.clientX-offsetX}px`;
+  selectedCropNode.style.top = `${e.clientY-offsetY}px`;
+  selectedCropNode.classList.remove("placed");
 
-        let highlightOffsetX = 0
-        let highlightOffsetY = 0
-        
-        const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
-        if (type.height > 1) {
-          const nodeRect = selectedCropNode.getBoundingClientRect();
-          const checkPos = (e.clientY-offsetY)+(nodeRect.height/2)
-          
-          const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
-          
-          if (e.clientY > checkPos) {
-            highlightOffsetY = slotSize*(type.height/2)
-          }
-        }
-        if (type.width > 1) {
-          const nodeRect = selectedCropNode.getBoundingClientRect();
-          const chesPos = (e.clientX-offsetX)+(nodeRect.width/2)
-          
-          const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
-          
-          if (e.clientX > chesPos) {
-            highlightOffsetX = slotSize*(type.width/2)
-          }
-        }
-        selectedCropNode.recordedWidth = type.width;
-        selectedCropNode.recordedHeight = type.height;
-        const cropOverlap = getOverlappingElements(selectedCropNode, '.slot')
-        for (slot of cropOverlap) {
-          const slotRect = slot.getBoundingClientRect();
-          const isOverlapping =
-          e.clientX >= slotRect.left &&
-          e.clientX <= slotRect.right &&
-          e.clientY >= slotRect.top &&
-          e.clientY <= slotRect.bottom;
-          
-          if (isOverlapping) {
+  let highlightOffsetX = 0
+  let highlightOffsetY = 0
+  
+  const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
+  if (type.height > 1) {
+    const nodeRect = selectedCropNode.getBoundingClientRect();
+    const checkPos = (e.clientY-offsetY)+(nodeRect.height/2)
+    
+    const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
+    
+    if (e.clientY > checkPos) {
+      highlightOffsetY = slotSize*(type.height/2)
+    }
+  }
+  if (type.width > 1) {
+    const nodeRect = selectedCropNode.getBoundingClientRect();
+    const chesPos = (e.clientX-offsetX)+(nodeRect.width/2)
+    
+    const slotSize = document.querySelectorAll(".slot")[0].getBoundingClientRect().width
+    
+    if (e.clientX > chesPos) {
+      highlightOffsetX = slotSize*(type.width/2)
+    }
+  }
+  selectedCropNode.recordedWidth = type.width;
+  selectedCropNode.recordedHeight = type.height;
+  const cropOverlap = getOverlappingElements(selectedCropNode, '.slot')
+  for (slot of cropOverlap) {
+    const slotRect = slot.getBoundingClientRect();
+    const isOverlapping =
+    e.clientX >= slotRect.left &&
+    e.clientX <= slotRect.right &&
+    e.clientY >= slotRect.top &&
+    e.clientY <= slotRect.bottom;
+    
+    if (isOverlapping) {
       chosenSlot = slot
       break;
     }
     chosenSlot = null;
-    mouseHighlight.style.left = "-150px";
-    mouseHighlight.style.right = "-150px";
+    mouseHighlight.style.left = "-50%";
   }
   if (cropOverlap.length <= 0) {
     chosenSlot = null;
-    mouseHighlight.style.left = "-150px";
-    mouseHighlight.style.right = "-150px";
+    mouseHighlight.style.left = "-50%";
   }
-  
   if (chosenSlot != null) {
-    const overlappedRect = chosenSlot.getBoundingClientRect()
+    const overlappedRect = chosenSlot.getBoundingClientRect();
     
     let nodeRect = selectedCropNode.getBoundingClientRect();
     mouseHighlight.style.left = overlappedRect.left - highlightOffsetX
     mouseHighlight.style.top = overlappedRect.top - highlightOffsetY
     mouseHighlight.style.width = `${nodeRect.width}px`
     mouseHighlight.style.height = `${nodeRect.height}px`
+    // console.log(`${nodeRect.width}px`, `${nodeRect.height}px`, `${overlappedRect.left - highlightOffsetX}`, `${overlappedRect.top - highlightOffsetY}`)
   }
   
   const overlapSlots = getOverlappingElements(mouseHighlight, '.slot')
@@ -197,21 +195,12 @@ document.addEventListener("mouseup", () => {
     const overlapping = getOverlappingElements(mouseHighlight, '.crop');
     let cancel = false;
     overlapping.forEach((crop) => {
-      if (crop != selectedCropNode && crop.placed == true) {
+      if (crop != selectedCropNode && crop.classList.contains("placed")) {
         cancel = true;
         return;
       };
     });
     if (cancel) {return}
-    
-    selectedCropNode.classList.add("placed")
-    let placed = actionSounds.placed
-    placed.currentTime = 0
-    placed.volume = 0.5
-    placed.play()
-
-    let averageX = 0
-    let averageY = 0
     
     const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
     overlappedSlots = getOverlappingElements(mouseHighlight, '.slot');
@@ -219,6 +208,16 @@ document.addEventListener("mouseup", () => {
     const slotCount = type.height*type.width;
     if (overlappedSlots.length < slotCount) {return;};
     
+    selectedCropNode.classList.add("placed")
+
+    let placed = actionSounds.placed
+    placed.currentTime = 0
+    placed.volume = 0.5
+    placed.play()
+    console.log("lalala")
+    
+    let averageX = 0
+    let averageY = 0
     overlappedSlots.forEach((slot) => {
       slot.style.backgroundColor = "#996237";
       
@@ -231,6 +230,7 @@ document.addEventListener("mouseup", () => {
     selectedCropNode.style.top = averageY / overlappedSlots.length;
     selectedCropNode.cropPosition = chosenSlot;
     selectedCropNode.placed = true;
+    selectedCropNode.style.zIndex = "1"
     overlappedSlots = [];
   }
   
