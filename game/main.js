@@ -35,17 +35,15 @@ document.addEventListener("click", () => {
   backgroundMusic.volume = 0.5;
 }, {once: true});
 
-let musicButton = document.getElementById("musicButton");
-function musicToggle() {
-  musicButton.addEventListener("click", () => {
-    if(backgroundMusic.paused){
-      backgroundMusic.play();
-    } else {
-      backgroundMusic.pause();
-    }
-  })
-};
-musicToggle();
+document.getElementById("musicButton").addEventListener("click", () => {
+  if(backgroundMusic.paused){
+    backgroundMusic.play();
+    musicButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M580-86v-109q97-28 157.5-107T798-481q0-100-61-179T580-767v-109q142 29 232.5 139.5T903-481q0 144-90.5 255.5T580-86ZM57-318v-324h185l258-258v840L242-318H57Zm523 15v-355q53 26 86 73t33 105q0 58-33 105t-86 72Z"/></svg>'
+  } else {
+    backgroundMusic.pause();
+    musicButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M808-9 691-128q-25 15-53.5 26T577-86v-109q10-2 19-5t18-8L497-326v266L240-318H54v-324h137L5-834l73-73L882-83 808-9Zm35-265-77-79q14-30 22-62t8-66q0-100-61.5-179T577-767v-109q142 29 233.5 139.5T902-481q0 57-15.5 109T843-274ZM688-432 577-545v-113q53 25 87 72.5T698-480q0 13-2.5 25t-7.5 23ZM497-628 364-766l133-134v272Z"/></svg>'
+  }
+})
 
 const cropsDiv = document.getElementById("crops");
 let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array: Wall Cordinates
