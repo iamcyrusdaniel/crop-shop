@@ -30,7 +30,7 @@ const cropTypes = [
 ]
 
 let backgroundMusic = document.getElementById("backgroundMusic");
-document.addEventListener("click", () => {
+document.addEventListener("mousemove", () => {
   backgroundMusic.play();
   backgroundMusic.volume = 0.5;
 }, {once: true});
