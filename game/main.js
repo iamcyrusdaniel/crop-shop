@@ -170,16 +170,16 @@ document.addEventListener("mousemove", (e) => {
   if (overlapSlots.length > 0) {
     for (slot of overlappedSlots) {
       if (overlapSlots.indexOf(slot) == -1) {
-        slot.style.backgroundColor = "#996237"
+        slot.style.backgroundColor = "#f0dbc1"
       }
     }
     
     for (slot of overlapSlots) {
-      slot.style.backgroundColor = "#744521"
+      slot.style.backgroundColor = "#bfa688"
     }
   } else {
     for (slot of overlappedSlots) {
-      slot.style.backgroundColor = "#996237"
+      slot.style.backgroundColor = "#f0dbc1"
     }
   }
   overlappedSlots = overlapSlots
@@ -215,11 +215,11 @@ document.addEventListener("mouseup", () => {
     let averageX = 0
     let averageY = 0
     overlappedSlots.forEach((slot) => {
-      slot.style.backgroundColor = "#996237";
       
       const slotRect = slot.getBoundingClientRect();
       averageX += slotRect.left - (type.width > 1 ? slotRect.width/2 : 0)
       averageY += slotRect.top - (type.height > 1 ? slotRect.height/2 : 0)
+      slot.style.backgroundColor = "#f0dbc1";
     })
     
     selectedCropNode.style.left = averageX / overlappedSlots.length;
