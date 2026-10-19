@@ -40,9 +40,12 @@ body {
 }
 
 .game-menu {
-    padding: 10px;
-    background-color: #4d2d28;
-    border-bottom: 4px solid #5a332d;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    background-color: #f0dbc1;
+    border-bottom: 4px solid var(--card-border);
+    height: 80px;
 }
 
 .menu-title {
