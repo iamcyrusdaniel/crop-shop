@@ -273,7 +273,6 @@ button:active {
 }
 
 .crop {
-    width: calc(4%)/*calc(((190*1)+10) * 1px)*/;
     position: absolute;
     cursor: grab;
 }
