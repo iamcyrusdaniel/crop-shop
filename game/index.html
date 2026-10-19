@@ -12,12 +12,16 @@
         <audio id="backgroundMusic" src="../assets/music/thePriceIsRight.mp3" loop></audio>
         <header>
             <div class="game-menu">
-                <a class="menu-title" href="../home">crop shop</a>
+                <div>
+                    <button id="musicButton"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M580-86v-109q97-28 157.5-107T798-481q0-100-61-179T580-767v-109q142 29 232.5 139.5T903-481q0 144-90.5 255.5T580-86ZM57-318v-324h185l258-258v840L242-318H57Zm523 15v-355q53 26 86 73t33 105q0 58-33 105t-86 72Z"/></svg></button>
+                    <a class="menu-title" href="../home">crop shop</a>
+                    <h1 id="levelText">Level 1</h1>
+                </div>
+                <div>
+                    <button class="level-selector-toggle" onmousedown="openLevelSelector()"><svg xmlns="http://www.w3.org/2000/svg" height="70%" viewBox="0 0 24 24" width="70%" fill="#5c3b19"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></button>
+                </div>
             </div>
         </header>
-        <button id="musicButton"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M580-86v-109q97-28 157.5-107T798-481q0-100-61-179T580-767v-109q142 29 232.5 139.5T903-481q0 144-90.5 255.5T580-86ZM57-318v-324h185l258-258v840L242-318H57Zm523 15v-355q53 26 86 73t33 105q0 58-33 105t-86 72Z"/></svg></button>
-        <button class="level-selector-toggle" onmousedown="openLevelSelector()"><svg xmlns="http://www.w3.org/2000/svg" height="80%" viewBox="0 0 24 24" width="80%" fill="#5c3b19"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></button>
-        <h1 id="levelText">Level 1</h1>
         <div id="winScreen" class="hidden">
             <h1>you won!</h1>
             <div>
