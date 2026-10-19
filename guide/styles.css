@@ -1,3 +1,18 @@
+:root {
+    --bg-color: #eddfd2;
+    --card-bg: #f8ede4;
+    --card-border: #e1c9ac;
+    --text-dark: #3d2c24;
+    --text-main: #996237;
+    --btn-primary-bg: #6b8e23;
+    --btn-primary-border: #3b5311;
+    --btn-primary-color: white;
+    --btn-secondary-bg: #996237;
+    --btn-secondary-border: #5c3b19;
+    --btn-secondary-color: #f0dcc2;
+    --footer-text: #a89482;
+}
+
 * {
     padding: 0;
     margin: 0;
