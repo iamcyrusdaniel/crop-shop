@@ -23,7 +23,12 @@
 }
 
 body {
-    background-color: #4d2d28;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .hidden {
