@@ -17,9 +17,9 @@
     padding: 0;
     margin: 0;
     font-family: "Chewy", system-ui;
+    box-sizing: border-box;
     font-weight: 1;
     user-select: none;
-    color: #67D74B;
 }
 
 body {
