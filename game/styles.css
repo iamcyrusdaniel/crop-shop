@@ -193,16 +193,18 @@ button:active {
 }
 #submit {
     position: absolute;
-    width: 70px;
-    height: 40px;
-    left: 0px;
-    top: 50%;
+    right: 50%;
+    transform: translate(50%);
+    top: 110%;
+    width: 128px;
+    height: 64px;
     z-index: 20;
     
     background: #996237;
     border: solid #5c3b19 5px;
-    font-size: large;
+    border-radius: 20px;
     color: white;
+    font-size: 24px;
 }
 
 .placement-grid {
