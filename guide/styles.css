@@ -139,12 +139,12 @@ footer {
 }
 
 .fancyButton {
-    color: #67D74B;
-    background-color: #266f30;
     font-size: 25px;
-    border: 9px solid #1d5122;
+    color: var(--btn-primary-color);
+    background-color: var(--btn-primary-bg);
+    border: 6px solid var(--btn-primary-border);
     border-radius: 12px;
-    padding: 10px;
+    padding: 12px 18px;
     display: inline-block;
     justify-content: center;
     align-items: center;
