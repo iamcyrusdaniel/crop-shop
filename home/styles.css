@@ -72,16 +72,19 @@ body {
 }
 
 footer {
-    margin-top: auto;
-    background-color: #4d2d28;
-    border-top: 4px solid #5a332d;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: var(--text-main);
+    background-color: var(--card-bg);
+    border-top: 4px solid var(--card-border);
     width: 100%;
-    height: 50px;
+    height: 60px;
     font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .fancyButton {
