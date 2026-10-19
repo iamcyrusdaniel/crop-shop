@@ -79,6 +79,13 @@ main > h3 {
     margin-top: -20px;
 }
 
+main > section > h2 {
+    font-size: 32px;
+    color: var(--text-dark);
+    text-shadow: 2px 2px 0 var(--card-border);
+    border-bottom: 4px dashed var(--card-border);
+    padding-bottom: 4px;
+    margin-bottom: 12px;
 }
 
 .crops {
