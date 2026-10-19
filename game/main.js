@@ -469,38 +469,63 @@ function levelWin() {
     sound.pause();
     sound.currentTime = 0;
   })
-  const randomNumber =  Math.floor(Math.random() * winSoundEffects.length);
 
-  const soundEffect = winSoundEffects[randomNumber];
-  // soundEffect.volume = winVolumes[randomNumber];
+  const winTitle = winScreen.querySelector("h1");
+  if (level === levelArrays.length - 1) {
+    winTitle.innerText = "you beat the whole game! have a cookie 🍪";
+    winSoundEffects[0].play();
 
-  soundEffect.play();
+    let duration = 1000;
+    let end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 50,
+        spread: 360,
+        origin: {y: 0},
+        startVelocity: 50,
+        ticks: 100,
+        gravity: 10,
+      })
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  } else {
+    winTitle.innerText = "you won!";
+    const randomNumber =  Math.floor(Math.random() * winSoundEffects.length);
+
+    const soundEffect = winSoundEffects[randomNumber];
+    // soundEffect.volume = winVolumes[randomNumber];
+    soundEffect.play();
+
+    confetti({
+      particleCount: 150,
+      spread: 130,
+      origin: {y: 0},
+      startVelocity: 50,
+      ticks: 100,
+      gravity: 10,
+    })
+    confetti({
+      particleCount: 150,
+      spread: 360,
+      origin: {y: 0},
+      startVelocity: 20,
+      ticks: 100,
+      gravity: 10,
+    })
+    confetti({
+      particleCount: 150,
+      spread: 360,
+      origin: {y: 0},
+      startVelocity: 50,
+      ticks: 100,
+      gravity: 10,
+    })
+  }
+
   showWinScreen(true);
-
-  confetti({
-    particleCount: 150,
-    spread: 130,
-    origin: {y: 0},
-    startVelocity: 50,
-    ticks: 100,
-    gravity: 10,
-  })
-  confetti({
-    particleCount: 150,
-    spread: 360,
-    origin: {y: 0},
-    startVelocity: 20,
-    ticks: 100,
-    gravity: 10,
-  })
-  confetti({
-    particleCount: 150,
-    spread: 360,
-    origin: {y: 0},
-    startVelocity: 50,
-    ticks: 100,
-    gravity: 10,
-  })
 }
 
 const loseSoundEffects = [
