@@ -151,6 +151,11 @@ footer {
     text-decoration: none;
 }
 
+.fancyButton.secondary {
+    color: var(--btn-secondary-color);
+    background-color: var(--btn-secondary-bg);
+    border-color: var(--btn-secondary-border);
+}
 .fancyButton:hover, #redirectBottom:hover {
     filter: brightness(0.9);
     cursor: pointer;
