@@ -132,9 +132,10 @@ button:active {
     z-index: 4;
     height: fit-content;
     width: fit-content;
-    padding: 1vw;
+    background: #eddfd4;
     border: solid #e3c2a3 clamp(1px, 1vw, 13px);
     border-radius: 32px;
+    padding: 3vw;
 }
 
 .level-selection {
