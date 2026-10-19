@@ -24,9 +24,18 @@ body {
 } 
 
 .game-menu {
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
     background-color: #f0dbc1;
     border-bottom: 4px solid #e1c9ac;
+    height: 72px;
+}
+
+.game-menu > div {
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
 .menu-title {
@@ -175,15 +184,12 @@ button:active {
 .playing-area {
     height: fit-content;
     width: 90%;
-    position: relative;
 
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
 
-    max-height: 800px;
-    max-width: 800px;
+    transform: translate(-50%, -50%);
 }
 #submit {
     position: absolute;
