@@ -18,16 +18,15 @@
 body {
     width: 100vw;
     height: 100vh;
-    color: #67D74B;
-    background-color: #432222;
+    background-color: #eddfd2;
 
     overflow: hidden;
 } 
 
 .game-menu {
     padding: 10px;
-    background-color: #4d2d28;
-    border-bottom: 4px solid #5a332d;
+    background-color: #f0dbc1;
+    border-bottom: 4px solid #e1c9ac;
 }
 
 .menu-title {
@@ -35,7 +34,7 @@ body {
     cursor: pointer;
     width: fit-content;
     text-decoration: none;
-    color: #67D74B;
+    color: #3d2c24;
 }
 #musicButton {
     width: 50px;
@@ -43,13 +42,16 @@ body {
     
     margin: 10px 10px;
     
-    background: #996237;
-    border: solid #5c3b19 5px;
+    background: #f8ede4;
+    border: solid #e1c9ac 3px;
     color: #5c3b19;
     font-size: large;
 }
 #levelText {
     margin: 0px 10px;
+    background-color: lightgreen;
+    border: 2px solid green;
+    color: darkgreen;
 }
 
 button {
@@ -74,8 +76,6 @@ button:active {
     width: clamp(60px, 10vw, 100px);
     aspect-ratio: 1/1;
 
-    background: #996237;
-    border: solid #5c3b19 clamp(1px, 1vw, 10px);
 }
 .level-selector-toggle:hover {
     filter: brightness(0.9);
@@ -83,6 +83,8 @@ button:active {
 .level-selector-toggle:active {
     filter: brightness(0.7);
     transform: translate(1px, 1px);
+    background: #f8ede4;
+    border: solid #e1c9ac 3px;
 }
 
 #winScreen {
@@ -96,8 +98,8 @@ button:active {
     z-index: 4;
     height: 15%;
     width: 20%;
-    background: #996237;
-    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+    background: #eddfd4;
+    border: solid #e3c2a3 clamp(1px, 1vw, 13px);
     padding: 1vw;
 }
 #winScreen h1 {
@@ -132,9 +134,9 @@ button:active {
     z-index: 4;
     height: fit-content;
     width: fit-content;
-    background: #996237;
-    border: solid #5c3b19 clamp(1px, 1vw, 13px);
     padding: 1vw;
+    border: solid #e3c2a3 clamp(1px, 1vw, 13px);
+    border-radius: 32px;
 }
 
 .level-selection {
@@ -149,9 +151,11 @@ button:active {
     height: 8vw;
     margin: 1vw;
     font-size: 4vw;
-    color: #67D74B;
-    border: 1vw solid #1D5122;
-    background-color: #266F30;
+    color: #d1c7ba;
+    border: 0.5vh solid #d1c7ba;
+    background-color: #f8ede4;
+    background: #996237;
+    border: solid #5c3b19 5px;
 }
 
 .close-level-selector {
@@ -162,9 +166,8 @@ button:active {
     height: 4.5vw;
     width: 4.5vw;
     font-size: 3vw;
-    color: #67D74B;
-    background-color: #824b30;
-    border: 0.5vw solid #5c3b19;
+    background-color: #f8ede4;
+    border: solid #e1c9ac 0.5vw;
     font-family: monospace;
     font-weight: bold;
 }
@@ -192,13 +195,13 @@ button:active {
     
     background: #996237;
     border: solid #5c3b19 5px;
-    color: #5c3b19;
     font-size: large;
+    color: white;
 }
 
 .placement-grid {
     /* height: fit-content; */
-    background-color: #824b30;
+    background-color: #85604e;
     
     position: relative;
     left: 50%;
@@ -221,15 +224,15 @@ button:active {
     box-sizing: border-box;
     width: 100%;
     aspect-ratio: 1/1;
-    background-color: #996237;
-    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+    background-color: #f0dbc1;
+    border: solid #e1c9ac 1vh;
 }
 .placement-grid .wall {
     box-sizing: border-box;
     width: 100%;
     aspect-ratio: 1/1;
-    background-color: #5c3b19;
-    border: solid #5c3b19 clamp(1px, 1vw, 13px);
+    background-color: #87745f;
+    border: solid #6c5742 1vh;
 }
 
 #crops {
@@ -297,4 +300,8 @@ button:active {
     /* background-color: rgba(128, 128, 128, 0.315); */
 
     pointer-events: none;
+}
+
+#retryButton, #nextButton {
+    color: #f0dcc2 !important;
 }
