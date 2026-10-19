@@ -49,11 +49,11 @@ body {
 }
 
 .menu-title {
-    font-size: clamp(30px, 4vw, 60px);
+    font-size: 48px;
     cursor: pointer;
-    width: fit-content;
     text-decoration: none;
-    color: #67D74B;
+    text-shadow: 4px 4px 0 #d0ba9f;
+    color: var(--text-dark);
 }
 
 #textBody {
