@@ -345,12 +345,18 @@ let setLevel = (index) => {
 };
 
 let levelButtons = document.querySelectorAll(".level-option");
+let levelsCleared = parseInt(localStorage.getItem("levelsCleared")) || 0;
 
 let levelButtonselection = () => {
   levelButtons.forEach((levelButton, index) => {
-    levelButton.addEventListener("click", () => {
-      setLevel(index);
-    });
+    if (index <= levelsCleared) {
+      levelButton.classList.add("accessible");
+      levelButton.addEventListener("click", () => {
+        setLevel(index);
+      });
+    } else {
+      levelButton.classList.add("inaccessible");
+    } 
   });
 }
 levelButtonselection();
@@ -420,6 +426,14 @@ const winVolumes = [
 ]
 
 function levelWin() {
+  levelsCleared = Math.max(level+1, levelsCleared);
+  localStorage.setItem("levelsCleared", levelsCleared);
+  levelSelector.classList.add("hidden");
+  if (level+1 < levelButtons.length) {
+    levelButtons[level+1].classList.remove("inaccessible");
+    levelButtons[level+1].classList.add("accessible");
+  }
+
   winSoundEffects.forEach(sound => {
     sound.pause();
     sound.currentTime = 0;

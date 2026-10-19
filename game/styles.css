@@ -156,15 +156,24 @@ button:active {
 
 .level-option {
     box-sizing: border-box;
-    width: 8vw;
-    height: 8vw;
-    margin: 1vw;
+    width: 6vw;
+    height: 6vw;
+    margin: 1.2vw;
     font-size: 4vw;
     color: #d1c7ba;
+    border-radius: 20%;
     border: 0.5vh solid #d1c7ba;
     background-color: #f8ede4;
+}
+
+.level-option.accessible {
     background: #996237;
     border: solid #5c3b19 5px;
+    color: #f0dcc2;
+}
+
+.inaccessible {
+    cursor: not-allowed !important;
 }
 
 .close-level-selector {
