@@ -156,6 +156,12 @@ footer {
     background-color: var(--btn-secondary-bg);
     border-color: var(--btn-secondary-border);
 }
+
+#redirectBottom {
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
 .fancyButton:hover, #redirectBottom:hover {
     filter: brightness(0.9);
     cursor: pointer;
