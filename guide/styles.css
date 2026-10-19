@@ -118,6 +118,13 @@ main > section > h2 {
     aspect-ratio: 1/2;
 }
 
+.beetroot {
+    background-color: rgb(128, 0, 128);
+    border: solid rgb(68, 0, 68) clamp(1px, 1vw, 13px);
+    height: 5vw;
+    aspect-ratio: 2/1;
+}
+
 .watermelon {
     background-color: green;
     border: solid rgb(0, 74, 0) clamp(1px, 1vw, 13px);
