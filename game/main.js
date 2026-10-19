@@ -288,6 +288,7 @@ function openLevelSelector() {
   levelSelector.classList.toggle("hidden");
   if(!levelSelector.classList.contains("hidden")) {
     showWinScreen(false);
+    levelButtonselection();
   }
 }
 
