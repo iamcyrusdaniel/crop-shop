@@ -107,9 +107,8 @@ footer {
 }
 
 #redirectBottom {
-    border: 5px solid #1d5122;
     font-size: 20px;
-    padding-block: 0;
+    padding: 0px 10px;
 }
 
 .fancyButton:hover, #redirectBottom:hover {
