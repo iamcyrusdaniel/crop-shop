@@ -17,6 +17,9 @@
     margin: 0;
     padding: 0;
     font-family: "Chewy", system-ui;
+    box-sizing: border-box;
+}
+
 }
 
 #topTitle {
