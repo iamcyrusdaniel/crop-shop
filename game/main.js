@@ -383,6 +383,7 @@ let levelButtonselection = () => {
       levelButton.classList.add("accessible");
       levelButton.addEventListener("click", () => {
         setLevel(index);
+        levelSelector.classList.add("hidden");
       });
     } else {
       levelButton.classList.add("inaccessible");
