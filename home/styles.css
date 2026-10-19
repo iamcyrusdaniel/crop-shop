@@ -32,11 +32,10 @@
 }
 
 #topTitle {
-    margin-top: 10vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(20px, 5vh, 50px);
+    gap: 20px;
 }
 
 #header {
