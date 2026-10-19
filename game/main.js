@@ -197,13 +197,29 @@ document.addEventListener("mouseup", () => {
         return;
       };
     });
-    if (cancel) {return}
+
+    const wallOverlap = getOverlappingElements(mouseHighlight, '.wall');
+    if (wallOverlap.length > 0) {
+      cancel = true;
+    }
+
+    if (cancel) {
+      mouseHighlight.style.left = "-50%";
+      selectedCropNode.cropPosition = null;
+      selectedCropNode = null;
+      chosenSlot = null;
+      return;
+    }
     
     const type = cropTypes.find(cropType => {return cropType.name === selectedCropType})
     overlappedSlots = getOverlappingElements(mouseHighlight, '.slot');
     
     const slotCount = type.height*type.width;
-    if (overlappedSlots.length < slotCount) {return;};
+    if (overlappedSlots.length < slotCount) {
+      selectedCropNode.cropPosition = null;
+      selectedCropNode = null;
+      return;
+    }
     
     selectedCropNode.classList.add("placed")
 
@@ -212,25 +228,34 @@ document.addEventListener("mouseup", () => {
     placed.volume = 0.5
     placed.play()
     
-    let averageX = 0
-    let averageY = 0
     overlappedSlots.forEach((slot) => {
-      
-      const slotRect = slot.getBoundingClientRect();
-      averageX += slotRect.left - (type.width > 1 ? slotRect.width/2 : 0)
-      averageY += slotRect.top - (type.height > 1 ? slotRect.height/2 : 0)
       slot.style.backgroundColor = "#f0dbc1";
     })
-    
-    selectedCropNode.style.left = averageX / overlappedSlots.length;
-    selectedCropNode.style.top = averageY / overlappedSlots.length;
-    selectedCropNode.cropPosition = chosenSlot;
+
+    let topSlot = overlappedSlots[0];
+    overlappedSlots.forEach((slot) => {
+      const slotRect = slot.getBoundingClientRect();
+      const topRect = topSlot.getBoundingClientRect();
+      if (slotRect.top < topRect.top || (slotRect.top === topRect.top && slotRect.left < topRect.left)) {
+        topSlot = slot;
+      }
+    });
+
+    const topRect = topSlot.getBoundingClientRect();
+    selectedCropNode.style.left = topRect.left;
+    selectedCropNode.style.top = topRect.top;
+
+    selectedCropNode.cropPosition = topSlot;
     selectedCropNode.placed = true;
     selectedCropNode.style.zIndex = "1"
     overlappedSlots = [];
+  } else if (selectedCropNode != null) {
+    selectedCropNode.cropPosition = null;
+    selectedCropNode.placed = false;
   }
   
   selectedCropNode = null;
+  mouseHighlight.style.left = "-50%";
 });
 
 function getOverlappingElements(targetElement, selected_class) {
@@ -307,12 +332,13 @@ let setLevel = (index) => {
         
     cropDiv.classList.add(crop);
     cropDiv.classList.add("crop");
-    cropDiv.style.left = `calc(${backgroundRect.left}px + ${cropIndex * 20}vh)`;
+    cropDiv.style.left = `calc(${backgroundRect.left - 20}px + ${cropIndex * 10}vh)`;
     cropDiv.style.top = `${backgroundRect.top}px`;
     const type = cropTypes.find(cropType => {return cropType.name === crop})
     cropDiv.recordedHeight = type.height;
     cropDiv.recordedWidth = type.width;
     cropDiv.placed = false;
+    cropDiv.cropPosition = null;
     
     document.body.append(cropDiv);
     
@@ -322,6 +348,7 @@ let setLevel = (index) => {
       dragging = true;
       chosenSlot = null;
       cropDiv.placed = false;
+      cropDiv.cropPosition = null;
 
       let pickup = actionSounds.pickup;
       pickup.currentTime = 0;
@@ -375,12 +402,14 @@ function resizeCrop(crop) {
   const cropWidth = crop.recordedWidth;
   const rect = document.querySelector(".slot").getBoundingClientRect();
   const styles = window.getComputedStyle(crop);
+
+  const gap = 7;
   const width = 
-  parseFloat(rect.width * cropWidth)
+  parseFloat((rect.width * cropWidth) + ((cropWidth - 1) * gap))
    - parseFloat(styles.borderLeftWidth)
    - parseFloat(styles.borderRightWidth)
   const height =
-  parseFloat(rect.height * cropHeight)
+  parseFloat((rect.height * cropHeight) + ((cropHeight - 1) * gap))
   - parseFloat(styles.borderTopWidth)
   - parseFloat(styles.borderBottomWidth)
    crop.style.height = height + "px"
