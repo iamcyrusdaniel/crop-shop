@@ -47,16 +47,16 @@ document.getElementById("musicButton").addEventListener("click", () => {
 
 const cropsDiv = document.getElementById("crops");
 let levelArrays = [ // First Array: Crops, Second Number: Grid Size, Third Array: Wall Cordinates
-  [["tomato"], 1,[]],
-  [["tomato", "tomato"],4,[[0,1], [1,0]]],
-  [["tomato", "carrot"], 4,[[1,1]]],
-  [["carrot", "tomato", "carrot"], 9,[[0,1],[1,2],[2,0]]],
-  [["watermelon", "watermelon", "beetroot", "carrot"], 16,[[2,0],[3,0],[1,2],[1,3]]],
-  [["carrot", "carrot", "beetroot","tomato"], 9,[[0,2],[2,0]]],
-  [["carrot", "carrot", "carrot", "beetroot", "watermelon", "watermelon", "tomato"], 25,[[0,0],[1,0],[0,4],[2,3],[4,0],[4,4]]],
-  [["tomato","tomato","carrot","carrot","watermelon","beetroot","beetroot"], 16,[[1,3],[1,0]]],
-  [["tomato"], 9,[]],
-  [["tomato"], 9,[]],
+  [["tomato"], 1, []],
+  [["tomato", "tomato"], 4, [[0, 1], [1, 0]]],
+  [["tomato", "carrot"], 4, [[1, 1]]],
+  [["tomato", "carrot", "carrot"], 9, [[0, 1], [1, 2], [2, 0]]],
+  [["tomato", "carrot", "carrot", "beetroot"], 9, [[0, 2], [2, 0]]],
+  [["watermelon", "carrot", "carrot", "beetroot", "beetroot"], 16, [[0, 1], [3, 3], [2, 3], [1, 3]]],
+  [["tomato","tomato","carrot","carrot","watermelon","beetroot","beetroot"], 16, [[1, 3], [1, 0]]],
+  [["carrot", "carrot", "carrot", "beetroot", "watermelon", "watermelon", "tomato"], 25, [[0,0], [1,0], [0,4],[2,3],[4,0],[4,4]]],
+  [["watermelon", "watermelon", "watermelon", "carrot", "carrot", "beetroot", "beetroot", "tomato", "tomato"], 25, [[0, 0]]],
+  [["watermelon", "watermelon", "carrot", "carrot", "beetroot", "beetroot", "tomato", "tomato"], 25, [[2, 0], [1, 0], [4, 0], [4, 1], [4, 4], [3, 2], [3, 3]]],
 ];
 
 let activateCropHandling = () => {
