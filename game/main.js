@@ -104,7 +104,9 @@ let activateCropHandling = () => {
       
 document.addEventListener("mousemove", (e) => {
   if (!dragging || selectedCropNode == null) {return};
-  
+    
+  levelSelector.classList.add("hidden");
+
   selectedCropNode.style.left = `${e.clientX-offsetX}px`;
   selectedCropNode.style.top = `${e.clientY-offsetY}px`;
   selectedCropNode.classList.remove("placed");
