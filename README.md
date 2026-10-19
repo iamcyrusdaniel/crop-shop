@@ -7,9 +7,11 @@ a game about selling your crops, but YOU are the seller and you need to manually
 
 1. pick a level
 2. drag the crops into the grid
-3. fit everything in
-4. submit your amazing cart
-5. next level!
+3. enjoy the amazing sound effects
+4. fit everything in
+5. submit your amazing cart
+6. enjoy even more amazing sound effects
+7. next level!
 
 ## What's there?
 
@@ -17,7 +19,20 @@ a game about selling your crops, but YOU are the seller and you need to manually
 - drag and drop placement
 - multiple levels
 - level selection screen
-- farm themed colors (mostly dirt and grass)
+- grid snapping
+- submitting
+- funny sound effects
+- a guide
+- awesome confetti
+- background music
+- random background particles
+- modern and clean looking design
+- custom styling
+- interactive buttons
+- all in the browser :D
+- local storage saving
+- walls that spice up levels
+- placement highlighting
 
 ## Made with
 
@@ -25,14 +40,12 @@ a game about selling your crops, but YOU are the seller and you need to manually
 - CSS
 - JS
 
-We didn't use any frameworks or libraries (not sure if those both are the same thing), just vanilla JS :D
+We didn't use any frameworks or libraries (not sure if those both are the same thing) other than canvas confetti, just vanilla JS :D
+
+## Final notes
 
 Made by Justin and Cyrus!
 
-We made this for the **harvest** themed hackathon
+We made this for the **harvest** theme
 
-## Anything else?
-
-This game isn't completed yet and we hope to actually add the entire concept of "you did it! Next level!" because currently we've only worked out dragging and dropping, as well as placement
-
-Thanks for checking out our game Crop Shop! 🌽 <- Justin's contribution
+Thanks for checking out our game Crop Shop, we really hope you like it! 🌽 <- Justin's contribution
