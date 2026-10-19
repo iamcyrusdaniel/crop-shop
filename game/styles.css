@@ -280,21 +280,21 @@ button:active {
 
 .tomato {
     background-color: red;
-    border: solid rgb(223, 0, 0) clamp(1px, 1vw, 13px);
+    border: solid rgb(223, 0, 0) 1vh;
 }
 
 .carrot {
     background-color: orange;
-    border: solid rgb(217, 141, 0) clamp(1px, 1vw, 13px);
+    border: solid rgb(217, 141, 0) 1vh;
 }
 
 .watermelon {
     background-color: green;
-    border: solid rgb(0, 74, 0) clamp(1px, 1vw, 13px);
+    border: solid rgb(0, 74, 0) 1vh;
 }
 .beetroot {
     background-color: rgb(128, 0, 128);
-    border: solid rgb(68, 0, 68) clamp(1px, 1vw, 13px);
+    border: solid rgb(68, 0, 68) 1vh;
 }
 
 .crop:active {
