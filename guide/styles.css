@@ -135,10 +135,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-#redirectBottom {
-    border: 5px solid #1d5122;
-    font-size: 20px;
-    padding-block: 0;
+    gap: 15px;
 }
 
 .fancyButton {
