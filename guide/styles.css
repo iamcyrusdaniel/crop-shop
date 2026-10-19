@@ -69,10 +69,14 @@ main {
     height: auto;
 }
 
-main {
-    display: flex;
-    gap: 10vw;
-    padding-right: 20px;
+main > h1 {
+  font-size: 48px;
+  color: var(--text-dark);
+  text-shadow: 4px 4px 0 var(--card-border);
+}
+
+main > h3 {
+    margin-top: -20px;
 }
 
 #sidebar {
