@@ -31,6 +31,12 @@ body {
     justify-content: space-between;
 }
 
+.page-container {
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    margin: 40px auto;
+    width: 95%;
 }
 
 .game-menu {
