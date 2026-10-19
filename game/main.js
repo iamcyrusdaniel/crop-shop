@@ -554,8 +554,7 @@ function winScreenButtons() {
   })
   nextButton.addEventListener("click", () => {
     showWinScreen(false);
-    let levelButtonCount = document.querySelectorAll(".level-option").length;
-    if(level + 1 < levelButtonCount) {
+    if(level + 1 < levelButtons.length) {
       setLevel(level + 1);
     }
   })
