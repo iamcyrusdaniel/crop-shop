@@ -135,9 +135,6 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-}
-
 #redirectBottom {
     border: 5px solid #1d5122;
     font-size: 20px;
