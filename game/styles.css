@@ -47,12 +47,10 @@ body {
 }
 #musicButton {
     width: 50px;
-    aspect-ratio: 1/1;
-    
-    margin: 10px 10px;
-    
+    height: 50px;
     background: #f8ede4;
     border: solid #e1c9ac 3px;
+    border-radius: 16px;
     color: #5c3b19;
     font-size: large;
 }
